@@ -1,0 +1,869 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[15차시] 빅데이터 분석 실습</title><meta name="data-notion-page-icon" content="🌡️"/><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%8C%A1%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E"/><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><nav style="margin:16px 0;font-family:Malgun Gothic,sans-serif"><a href="../" style="color:rgb(55,53,47)">수업 목록</a></nav><article id="33bddb6c-37bb-80b7-a3cf-df318178ee3c" class="page sans" data-notion-page-icon="🌡️"><header><div class="page-header-icon undefined"><span class="icon" data-emoji="🌡️"></span></div><h1 class="page-title" dir="auto">[15차시] 빅데이터 분석 실습</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><figure id="33bddb6c-37bb-8008-9983-fdc7ae9f2f27" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/1%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_%EA%B8%B0%EC%98%A8.pdf" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/1%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_%EA%B8%B0%EC%98%A8.pdf" data-notion-file-alias="(1) 데이터분석_기온.pdf">(1) 데이터분석_기온.pdf</a></div></figure><figure id="33bddb6c-37bb-8045-8b2f-c4fb49f5ca50" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/2%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_%EC%84%9C%EC%9A%B8%EC%9D%98%EA%B8%B0%EC%98%A8.pdf" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/2%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_%EC%84%9C%EC%9A%B8%EC%9D%98%EA%B8%B0%EC%98%A8.pdf" data-notion-file-alias="(2) 데이터분석_서울의기온.pdf">(2) 데이터분석_서울의기온.pdf</a></div></figure><figure id="33bddb6c-37bb-809d-86ef-e6784d8083c1" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/3%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D.pdf" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/3%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D.pdf" data-notion-file-alias="(3) 데이터분석.pdf">(3) 데이터분석.pdf</a></div></figure><figure id="33bddb6c-37bb-80db-807c-c964d9aafa5a" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/4%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D.pdf" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/4%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D.pdf" data-notion-file-alias="(4) 데이터분석.pdf">(4) 데이터분석.pdf</a></div></figure><figure id="33bddb6c-37bb-80dd-8591-dfd81af8f265" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/5%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_%EB%82%B4%EC%83%9D%EC%9D%BC%EC%9D%98%EA%B8%B0%EC%98%A8%EB%B3%80%ED%99%94.pdf" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/5%EC%B0%A8%EC%8B%9C_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_%EB%82%B4%EC%83%9D%EC%9D%BC%EC%9D%98%EA%B8%B0%EC%98%A8%EB%B3%80%ED%99%94.pdf" data-notion-file-alias="(5) 데이터분석_내생일의기온변화.pdf">(5) 데이터분석_내생일의기온변화.pdf</a></div></figure><h2 id="33bddb6c-37bb-8041-a3a5-e54a426bcb81" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">기온 공공 데이터 살펴보기</h2><p id="366ddb6c-37bb-80bc-95b7-c4805b884f72" class="" dir="auto"><a href="https://data.kma.go.kr/cmmn/main.do">https://data.kma.go.kr/cmmn/main.do</a>  </p><figure id="33bddb6c-37bb-80fe-8369-f491e17409ae" class="image" data-notion-image="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/image.png" dir="ltr"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/image.png"><img style="width:703.9772338867188px" src="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/image.png"/></a></figure><figure id="33bddb6c-37bb-8040-a044-f719a322cd51" class="image" data-notion-image="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/1.png" dir="ltr"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/1.png"><img style="width:703.991455078125px" src="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/1.png"/></a></figure><p id="33bddb6c-37bb-80bf-bb77-e241999714dc" class="" dir="auto">
+</p><h2 id="33bddb6c-37bb-80cd-ad3a-ea4d0bccfd30" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">서울과 부산 기온 데이터</h2><figure id="366ddb6c-37bb-8009-98d8-efcd936d8157" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/seoul.csv" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/seoul.csv" data-notion-file-alias="seoul.csv">seoul.csv</a></div></figure><figure id="366ddb6c-37bb-8039-8658-c46391076322" dir="ltr"><div class="source"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/busan.csv" data-notion-file="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/busan.csv" data-notion-file-alias="busan.csv">busan.csv</a></div></figure><h2 id="33bddb6c-37bb-8086-b9b9-d8de35f9807a" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">서울의 최고 기온은? </h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="33bddb6c-37bb-808e-a979-c443cf17e9fa" class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import csv
+f = open(&#x27;seoul.csv&#x27;, encoding=&#x27;cp949&#x27;)
+data = csv.reader(f)
+for row in data:
+    print(row)
+f.close()</code></pre><table id="33bddb6c-37bb-804a-9ff9-e3e077b217c0" class="simple-table" dir="ltr"><tbody><tr id="33bddb6c-37bb-8044-baca-e5b3b1299af2" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><strong>코드 라인</strong></td><td id="`KsA" class="" style="width:521.9999847412109px"><strong>설명</strong></td></tr><tr id="33bddb6c-37bb-8046-a54e-c27062b16188" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><code>import csv</code></td><td id="`KsA" class="" style="width:521.9999847412109px">CSV 파일을 다루기 위한 파이썬 내장 모듈을 불러오기</td></tr><tr id="33bddb6c-37bb-804f-8aeb-fba144e18698" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><code>f = open(&#x27;seoul.csv&#x27;)</code></td><td id="`KsA" class="" style="width:521.9999847412109px"><code>seoul.csv</code> 파일을 읽기 모드로 열기. 변수 <code>f</code>는 파일 객체를 가리킴.</td></tr><tr id="33bddb6c-37bb-8021-9f35-fcadbc1f6ec0" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><code>data = csv.reader(f)</code></td><td id="`KsA" class="" style="width:521.9999847412109px">열린 파일 <code>f</code>를 CSV 형식으로 읽어 들임. <code>data</code>는 파일의 내용을 한 줄씩 넘겨주는 <strong>반복 가능(iterable) 객체</strong>가 됨.</td></tr><tr id="33bddb6c-37bb-8044-8a24-d56024afc4a7" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><code>for row in data :</code></td><td id="`KsA" class="" style="width:521.9999847412109px">나머지 데이터(본문)를 한 줄씩 가져와서 <code>row</code>라는 변수에 담아 반복함.</td></tr><tr id="33bddb6c-37bb-80e8-a406-f9699d7655ca" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><code>print(row)</code></td><td id="`KsA" class="" style="width:521.9999847412109px">읽어온 줄(<code>row</code>)을 출력함. 이때 각 줄은 <strong>리스트(List)</strong> 형태로 출력됨.</td></tr><tr id="33bddb6c-37bb-804e-ae85-fa5687e0454d" dir="ltr"><td id=":rby" class="" style="width:170.8096466064453px"><code>f.close()</code></td><td id="`KsA" class="" style="width:521.9999847412109px">파일 읽기가 끝났으므로 열려 있는 파일 객체를 닫아 메모리 자원을 해제함.</td></tr></tbody></table><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js" integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="33bddb6c-37bb-80b0-a764-dd8852b10021" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">import csv
+f = open(&#x27;seoul.csv&#x27;, encoding=&#x27;cp949&#x27;)
+data = csv.reader(f)
+header = next(data)
+max_temp = -999
+max_date = &#x27;&#x27;
+for row in data:
+    if row[-1] == &#x27;&#x27; :
+        row[-1] = -999
+    row[-1] = float(row[-1])
+    if max_temp &lt; row[-1]:
+        max_date = row[0]
+        max_temp = row[-1]
+f.close()
+print(f&#x27;기상 관측 이래 서울의 최고 기온이 가장 높았던 날은 {max_date}로, {max_temp}도였습니다.&#x27;)</code></pre><table id="33bddb6c-37bb-8036-bb0d-df4e34811fbd" class="simple-table" dir="ltr"><tbody><tr id="33bddb6c-37bb-808c-bf54-e8712ab3e771" dir="ltr"><td id="pXKP" class=""><strong>단계</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><strong>주요 코드</strong></td><td id="?mS}" class="" style="width:418.9942932128906px"><strong>명사 종결형 설명</strong></td></tr><tr id="33bddb6c-37bb-80c5-80b5-f2ab2ed2887c" dir="ltr"><td id="pXKP" class=""><strong>1. 파일 로드</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>open(&#x27;seoul.csv&#x27;, encoding=&#x27;cp949&#x27;)</code></td><td id="?mS}" class="" style="width:418.9942932128906px"><code>cp949</code> 인코딩을 적용하여 한글 깨짐 없이 CSV 파일 오픈</td></tr><tr id="33bddb6c-37bb-8030-84a2-ccda21918b2f" dir="ltr"><td id="pXKP" class=""><strong>2. 객체 생성</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>csv.reader(f)</code></td><td id="?mS}" class="" style="width:418.9942932128906px">파일 내용을 줄 단위로 읽어올 수 있는 reader 객체 생성</td></tr><tr id="33bddb6c-37bb-8080-9991-ef459b6d39e3" dir="ltr"><td id="pXKP" class=""><strong>3. 헤더 스킵</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>header = next(data)</code></td><td id="?mS}" class="" style="width:418.9942932128906px">최상단 제목 줄(날짜, 지점 등)을 건너뛰고 실제 데이터로 이동</td></tr><tr id="33bddb6c-37bb-80b4-9eb2-fe7f43f3076d" dir="ltr"><td id="pXKP" class=""><strong>4. 변수 초기화</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>max_temp = -999</code></td><td id="?mS}" class="" style="width:418.9942932128906px">최고 기온 비교를 위한 기준값 설정 (아주 낮은 숫자로 시작)</td></tr><tr id="33bddb6c-37bb-8021-9dda-dbc93b65cb9a" dir="ltr"><td id="pXKP" class=""><strong>5. 결측치 판별</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>if row[-1] == &#x27;&#x27; :</code></td><td id="?mS}" class="" style="width:418.9942932128906px">기온 값이 비어 있는 행(결측치)을 찾아 에러 발생 방지</td></tr><tr id="33bddb6c-37bb-80d6-aa93-caa14fec2edd" dir="ltr"><td id="pXKP" class=""><strong>6. 임시값 할당</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>row[-1] = -999</code></td><td id="?mS}" class="" style="width:418.9942932128906px">데이터가 없는 경우 비교 대상에서 제외되도록 아주 낮은 값 대입</td></tr><tr id="33bddb6c-37bb-8004-ab87-dd465d24b2ae" dir="ltr"><td id="pXKP" class=""><strong>7. 데이터 변환</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>float(row[-1])</code></td><td id="?mS}" class="" style="width:418.9942932128906px">문자열 타입의 기온 데이터를 연산 가능한 <strong>실수형</strong>으로 변환</td></tr><tr id="33bddb6c-37bb-8063-8f73-de8b9fc31de6" dir="ltr"><td id="pXKP" class=""><strong>8. 조건 비교</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>if max_temp &lt; row[-1] :</code></td><td id="?mS}" class="" style="width:418.9942932128906px">현재 줄의 기온이 기존 기록보다 높을 경우 조건문 진입</td></tr><tr id="33bddb6c-37bb-80a0-96f7-f0a4b9ee3bc9" dir="ltr"><td id="pXKP" class=""><strong>9. 기록 갱신</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>max_date = row[0]</code>, <code>max_temp = row[-1]</code></td><td id="?mS}" class="" style="width:418.9942932128906px">새로운 최고 기온과 해당 날짜를 변수에 덮어쓰기</td></tr><tr id="33bddb6c-37bb-8049-bd42-e70b52fa42bf" dir="ltr"><td id="pXKP" class=""><strong>10. 파일 폐쇄</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>f.close()</code></td><td id="?mS}" class="" style="width:418.9942932128906px">파일 사용 완료 후 시스템 자원 반납 및 연결 종료</td></tr><tr id="33bddb6c-37bb-803c-a5ba-d3f5f2b91502" dir="ltr"><td id="pXKP" class=""><strong>11. 결과 발표</strong></td><td id="Xnv~" class="" style="width:155.99998474121094px"><code>print(...)</code></td><td id="?mS}" class="" style="width:418.9942932128906px">최종적으로 저장된 최고 기온 발생일과 온도 출력</td></tr></tbody></table><p id="366ddb6c-37bb-80b9-9f04-e0c6ce0abb5e" class="" dir="auto"><strong>UTF-8</strong>과 <strong>CP949</strong>는 컴퓨터가 문자를 숫자로 변환(인코딩)하는 방식의 차이가 있음.</p><h3 id="366ddb6c-37bb-8006-865b-fc0021bfb7e2" class="" dir="auto">1. UTF-8 (Universal Coded Character Set + Transformation Format – 8-bit)</h3><p id="366ddb6c-37bb-8017-91df-f9d77cf30caa" class="" dir="auto">현재 전 세계적으로 가장 많이 쓰이는 <strong>표준 인코딩</strong> 방식임.</p><ul id="366ddb6c-37bb-8083-b69a-f7b620d59adc" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>특징:</strong> 가변 길이 인코딩을 사용함. 영어는 1바이트, <strong>한글은 3바이트</strong>로 저장함.</li></ul><ul id="366ddb6c-37bb-8016-8b4a-e74219812d7f" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>장점:</strong> 전 세계 모든 언어(한글, 한자, 이모지 등)를 하나의 규칙으로 다 표현할 수 있음. 웹사이트나 최신 소프트웨어의 기본값임.</li></ul><ul id="366ddb6c-37bb-8009-bb89-d6ef1259d334" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>단점:</strong> 한글 한 글자를 저장할 때 CP949보다 용량을 조금 더 차지함.</li></ul><h3 id="366ddb6c-37bb-80f5-b51f-d26f81be12e6" class="" dir="auto">2. CP949 (Code Page 949)</h3><p id="366ddb6c-37bb-805c-9834-c304affb3655" class="" dir="auto">마이크로소프트(MS)가 한글 윈도우에서 사용하기 위해 만든 방식으로, &#x27;MS949&#x27;라고도 부름.</p><ul id="366ddb6c-37bb-80a7-83dd-cb9999804a0a" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>특징:</strong> 고정된 2바이트 체계임. 영어는 1바이트, <strong>한글은 2바이트</strong>로 저장함.</li></ul><ul id="366ddb6c-37bb-8085-8fc9-f5b8095aa13e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>장점:</strong> 옛날 윈도우 환경이나 엑셀(Excel) 구버전과의 호환성이 좋음. 한글 저장 시 용량이 UTF-8보다 작음.</li></ul><ul id="366ddb6c-37bb-8000-b474-e033dbf55405" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>단점:</strong> 한국어 외에 다른 나라 언어를 동시에 표현하는 데 한계가 있음. 표준이 아니기에 다른 운영체제(Mac, Linux)에서 파일이 깨지는 원인이 됨.</li></ul><figure id="366ddb6c-37bb-80a7-b3ab-ef11a86ceaea" class="image" data-notion-image="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/image%201.png" dir="ltr"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/image%201.png"><img style="width:704.0104370117188px" src="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/image%201.png"/></a></figure><h2 id="33bddb6c-37bb-8091-b431-f89de08ac915" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">우리 동네 역대 최고 기온은?</h2><pre id="33bddb6c-37bb-8031-96a4-d035b86cbaea" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">import csv
+f = open(&#x27;busan.csv&#x27;, encoding=&#x27;CP949&#x27;)
+data = csv.reader(f)
+header = next(data)
+max_temp = -999
+max_date = &#x27;&#x27;
+for row in data:
+    if row[-1] == &#x27;&#x27; :
+        row[-1] = -999
+    row[-1] = float(row[-1])
+    if max_temp &lt; row[-1]:
+        max_date = row[0]
+        max_temp = row[-1]
+f.close()
+print(f&#x27;기상 관측 이래 부산 동구의 최고 기온이 가장 높았던 날은 {max_date}로, {max_temp}도 였습니다.&#x27;)</code></pre><h2 id="33bddb6c-37bb-80c8-9921-e087786fddca" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[실습] 내 생일의 날씨 변화는?</h2><h3 id="366ddb6c-37bb-800f-ada4-ed16a1be39b1" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">내 생일이 있는 ‘달’의 기온 변화는? (예) 5월의 경우</h3><pre id="366ddb6c-37bb-809e-9f3e-c991d438f55f" class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import csv
+import matplotlib. pyplot as plt
+f = open(&#x27;busan.csv&#x27;, encoding = &#x27;cp949&#x27;)
+data = csv.reader(f)
+next(data)
+result = []
+for row in data:
+    if row[-1] != &#x27;&#x27;:
+        if row[0].split(&#x27;-&#x27;)[1] == &#x27;05&#x27;:
+            result.append(float(row[-1]))
+plt. plot(result, &#x27;hotpink&#x27;)
+plt.show()</code></pre><h3 id="366ddb6c-37bb-805e-a319-cc907f8a3478" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">내 생일의 기온 변화는? (예) 5월 29일</h3><pre id="33bddb6c-37bb-8070-bb1f-c217dd0ecd3c" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">import csv
+import matplotlib.pyplot as plt
+f = open(&#x27;busan.csv&#x27;, encoding =&#x27;cp949&#x27;)
+data = csv.reader(f)
+next(data)
+high = []
+low = []
+result = []
+for row in data:
+    if row[-1] != &#x27;&#x27; and row[-2] != &#x27;&#x27;:
+        data = row[0].split(&#x27;-&#x27;)
+        if 2009 &lt;= int(row[0].split(&#x27;-&#x27;)[0]):
+          if row[0].split(&#x27;-&#x27;)[1] == &#x27;05&#x27; and row[0].split(&#x27;-&#x27;)[2] == &#x27;29&#x27;:
+               high.append(float(row[-1]))
+               low.append(float(row[-2]))
+
+plt.rcParams[&#x27;axes.unicode_minus&#x27;] = False
+plt.title(&#x27;Temperature Changes on My Birthday&#x27;)
+plt.plot(high, &#x27;hotpink&#x27;, label = &#x27;high&#x27;)
+plt.plot(low, &#x27;skyblue&#x27;, label = &#x27;low&#x27;)
+plt.legend()
+plt.show()
+</code></pre><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="💡" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="366ddb6c-37bb-805e-b48c-fc1a4d0ce57c" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="💡"></span></div><div style="width:100%"><h3 id="366ddb6c-37bb-80f0-b000-eefdda76426f" class="" dir="auto">1~5행: 데이터 로드 및 전처리</h3><ul id="366ddb6c-37bb-8018-b245-e2e9e20e2dce" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>1~2행:</strong> CSV 파일 처리를 위한 <code>csv</code> 및 그래프 시각화를 위한 <code>matplotlib.pyplot</code> 모듈 <strong>임포트</strong>.</li></ul><ul id="366ddb6c-37bb-80e6-8e0d-da815319b6a4" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>3행:</strong> 한글 인코딩(<code>cp949</code>) 규칙을 적용하여 <code>busan.csv</code> 파일 <strong>오픈</strong>.</li></ul><ul id="366ddb6c-37bb-8054-aa4f-cb6ae270dd3b" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>4행:</strong> 열린 파일을 콤마 기준으로 읽어오는 <code>reader</code> 객체 <strong>생성</strong>.</li></ul><ul id="366ddb6c-37bb-80c5-a6f7-f5e98cf27440" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>5행:</strong> 데이터의 첫 번째 줄(속성명)을 건너뛰기 위한 <code>next()</code> 함수 <strong>실행</strong>.</li></ul><h3 id="366ddb6c-37bb-805f-b5da-d2858249ddd2" class="" dir="auto">6~8행: 데이터 저장 리스트 초기화</h3><ul id="366ddb6c-37bb-808b-9f42-e9fd492905a0" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>6~8행:</strong> 연도별 최고 기온(<code>high</code>)과 최저 기온(<code>low</code>)을 담기 위한 빈 리스트 <strong>생성</strong>.</li></ul><h3 id="366ddb6c-37bb-8053-a93e-cf8f02deee31" class="" dir="auto">9~15행: 조건별 데이터 추출 및 변환</h3><ul id="366ddb6c-37bb-8014-83c9-d92e0663e97d" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>9행:</strong> 전체 데이터를 한 줄씩 확인하는 반복문 <strong>수행</strong>.</li></ul><ul id="366ddb6c-37bb-8033-a222-f5615a2aebe6" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>10행:</strong> 최고 기온(<code>row[-1]</code>)과 최저 기온(<code>row[-2]</code>) 데이터의 결측치 존재 여부 <strong>확인</strong>.</li></ul><ul id="366ddb6c-37bb-809a-82d0-f91e8a80f3d9" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>11행:</strong> 날짜 문자열을 하이픈() 기준으로 분리하여 리스트로 <strong>치환</strong>.</li></ul><ul id="366ddb6c-37bb-80f7-aa14-e0fa32ff8000" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>12행:</strong> 데이터의 연도가 2009년 이후인지 여부 <strong>판단</strong>. <code>2009 &lt;= int(row[0].split(&#x27;-&#x27;)[0])</code>라고 작성된 부분은 수학적으로 해석하면 &quot;2009이 데이터의 연도보다 작거나 같다&quot;는 뜻임. 이를 우리가 흔히 쓰는 문장으로 뒤집어 보면 &quot;데이터의 연도가 2009보다 크거나 같다&quot;가 됨. 즉, <strong>2009년을 포함하여 그 이후의 모든 연도</strong>를 선택하겠다는 의도임.</li></ul><ul id="366ddb6c-37bb-80ec-99d1-c1a8524afea9" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>13행:</strong> 월과 일이 각각 &#x27;05&#x27;와 &#x27;29&#x27;에 해당하는지(생일 여부) <strong>비교</strong>.</li></ul><ul id="366ddb6c-37bb-801c-bcdd-cba67bef6386" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>14~15행:</strong> 조건에 부합하는 최고/최저 기온을 실수형으로 변환하여 리스트에 각각 <strong>추가</strong>.</li></ul><h3 id="366ddb6c-37bb-8097-a03a-e4931296bd33" class="" dir="auto">16~21행: 시각화 설정 및 출력</h3><ul id="366ddb6c-37bb-80db-8095-d54c5555f9c3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>16행:</strong> 그래프 내 마이너스 기호 깨짐 방지를 위한 폰트 설정 값 <strong>변경</strong>. <code>rc</code>는 <strong>Run Command</strong>의 약자로, Matplotlib이 실행될 때 로드되는 기본 설정값들을 의미함.</li></ul><ul id="366ddb6c-37bb-80cb-96ca-fa3f17803151" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>폰트 크기와 선 굵기 일괄 변경이 가능함.</strong></li></ul><ul id="366ddb6c-37bb-8060-a3cb-c2eef0f87665" class="bulleted-list" dir="auto"><li style="list-style-type:disc">plt.rcParams[&#x27;font.size&#x27;] = 12<br/>plt.rcParams[&#x27;lines.linewidth&#x27;] = 2<br/>plt.rcParams[&#x27;lines.color&#x27;] = &#x27;red&#x27;<br/>plt.rcParams[&#x27;figure.figsize&#x27;] = (10, 6) # 그래프 크기 (가로, 세로)</li></ul><ul id="366ddb6c-37bb-80ba-9a30-ef4de174f0d2" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>17행:</strong> 그래프 상단에 표시될 영문 제목 <strong>설정</strong>.</li></ul><ul id="366ddb6c-37bb-80f6-ab6c-e1af30586a67" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>18~19행:</strong> 최고 기온(핫핑크)과 최저 기온(스카이블루)을 선 그래프 형태로 <strong>매핑</strong>.</li></ul><ul id="366ddb6c-37bb-8016-860e-ebeccade4715" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>20행:</strong> 각 선의 이름을 표시하는 범례 <strong>삽입</strong>.</li></ul><ul id="366ddb6c-37bb-80b9-9eee-d0ed10564664" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>21행:</strong> 최종 생성된 기온 변화 그래프를 화면에 <strong>출력</strong>.</li></ul></div></aside><h2 id="33bddb6c-37bb-80d8-9e1e-f1215eb87fca" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">그래프로 나타내기 연습</h2><pre id="33bddb6c-37bb-8039-b27b-f136a7d28daa" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">import matplotlib.pyplot as plt
+plt.title(&#x27;Legend&#x27;)
+plt.plot([10,20,30,40], color = &#x27;skyblue&#x27;, label = &#x27;skyblue&#x27;)
+plt.plot([40,30,20,10], color = &#x27;pink&#x27;, label = &#x27;pink&#x27;)
+plt.legend()
+plt.show</code></pre><figure id="366ddb6c-37bb-80fc-9e50-de4f0171ae80" class="image" style="text-align:left" data-notion-image="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/aa82b32b-fbf8-4e60-9561-a185abae6480.png" dir="ltr"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/aa82b32b-fbf8-4e60-9561-a185abae6480.png"><img style="width:416.49230769230775px" src="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/aa82b32b-fbf8-4e60-9561-a185abae6480.png"/></a></figure><table id="33bddb6c-37bb-8081-8498-fe07503904cb" class="simple-table" dir="ltr"><tbody><tr id="33bddb6c-37bb-80d1-b04f-e12bff4afd75" dir="ltr"><td id="Kujm" class=""><strong>구분</strong></td><td id="dl`&gt;" class=""><strong>주요 코드</strong></td><td id="biJ[" class="" style="width:349.99998474121094px"><strong>명사 종결형 설명</strong></td></tr><tr id="33bddb6c-37bb-80d5-ab9c-fbd6640f7bd9" dir="ltr"><td id="Kujm" class=""><strong>라이브러리 호출</strong></td><td id="dl`&gt;" class=""><code>import matplotlib.pyplot as plt</code></td><td id="biJ[" class="" style="width:349.99998474121094px">데이터 시각화를 위한 <code>pyplot</code> 모듈 임포트 및 별칭(<code>plt</code>) 설정</td></tr><tr id="33bddb6c-37bb-8054-b001-e09c711421df" dir="ltr"><td id="Kujm" class=""><strong>제목 설정</strong></td><td id="dl`&gt;" class=""><code>plt.title(&#x27;Legend&#x27;)</code></td><td id="biJ[" class="" style="width:349.99998474121094px">그래프 상단에 표시될 제목을 &#x27;Legend&#x27;로 지정</td></tr><tr id="33bddb6c-37bb-809b-969d-fc4059ebee18" dir="ltr"><td id="Kujm" class=""><strong>그래프 1 생성</strong></td><td id="dl`&gt;" class=""><code>plt.plot([10, 20, 30, 40], ...)</code></td><td id="biJ[" class="" style="width:349.99998474121094px"><code>skyblue</code> 색상의 상승 곡선 생성 및 범례용 레이블(<code>label</code>) 설정</td></tr><tr id="33bddb6c-37bb-80f2-b1f2-ec153ee17fbe" dir="ltr"><td id="Kujm" class=""><strong>그래프 2 생성</strong></td><td id="dl`&gt;" class=""><code>plt.plot([40, 30, 20, 10], ...)</code></td><td id="biJ[" class="" style="width:349.99998474121094px"><code>pink</code> 색상의 하강 곡선 생성 및 범례용 레이블(<code>label</code>) 설정</td></tr><tr id="33bddb6c-37bb-80a1-970c-c770ce1edc05" dir="ltr"><td id="Kujm" class=""><strong>범례 표시</strong></td><td id="dl`&gt;" class=""><code>plt.legend()</code></td><td id="biJ[" class="" style="width:349.99998474121094px">각 선의 <code>label</code> 값을 그래프 상의 적절한 위치에 박스 형태로 노출</td></tr><tr id="33bddb6c-37bb-8081-86ee-f0fcd069486c" dir="ltr"><td id="Kujm" class=""><strong>화면 출력</strong></td><td id="dl`&gt;" class=""><code>plt.show()</code></td><td id="biJ[" class="" style="width:349.99998474121094px">작성된 그래프를 화면(창)에 최종적으로 렌더링하여 표시</td></tr></tbody></table><figure id="367ddb6c-37bb-80cc-bf29-c244017a3638" class="block-color-orange_background link-to-page" data-notion-highlight="orange_background"><a href="%5B15%EC%B0%A8%EC%8B%9C%5D%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B6%84%EC%84%9D%20%EC%8B%A4%EC%8A%B5/Microsoft%20Power%20BI%EB%9E%80%20367ddb6c37bb80ccbf29c244017a3638.html" data-notion-page-id="367ddb6c-37bb-80cc-bf29-c244017a3638" data-notion-space-id="e9afc6d5-685d-4905-b99c-50ac26a3ee33"><span class="icon" data-emoji="🧃"></span>Microsoft Power BI란?</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,25 +1,801 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[1차시] 준비 중</title>
-<style>
-  body {
-    margin: 0 auto;
-    max-width: 720px;
-    padding: 48px 20px 80px;
-    font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
-    color: rgb(55, 53, 47);
-    background: #fff;
-    line-height: 1.6;
-  }
-  a { color: inherit; }
-</style>
-</head>
-<body>
-<p><a href="../">← 목록으로</a></p>
-<h1>[1차시]</h1>
-<p>이 페이지는 자리만 잡아 둔 상태입니다. 곧 실습 파일을 업로드하면 이 내용을 교체합니다.</p>
-</body>
-</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[1차시] 네트워크 환경 구성</title><meta name="data-notion-page-icon" content="🖥️"/><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%96%A5%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E"/><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><nav style="margin:16px 0;font-family:Malgun Gothic,sans-serif"><a href="../" style="color:rgb(55,53,47)">수업 목록</a></nav><article id="30dddb6c-37bb-80be-9ab6-ed26bd7dabce" class="page sans" data-notion-page-icon="🖥️"><header><div class="page-header-icon undefined"><span class="icon" data-emoji="🖥️"></span></div><h1 class="page-title" dir="auto">[1차시] 네트워크 환경 구성</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h1 id="30dddb6c-37bb-8040-a766-deaaee02636c" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto"><strong>무선 네트워크</strong></h1><h2 id="30dddb6c-37bb-806e-a402-d1aa0901670f" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">와이파이 vs 블루투스</h2><table id="30dddb6c-37bb-800e-913d-d19cb4f4373c" class="simple-table" dir="ltr"><tbody><tr id="30dddb6c-37bb-8091-944c-d3f67799037e" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>구분</strong></td><td id="}R}c" class="" style="width:251.15625px"><strong>와이파이 (Wi-Fi)</strong></td><td id="Fmd=" class="" style="width:222.96875px"><strong>블루투스 (Bluetooth)</strong></td></tr><tr id="30dddb6c-37bb-8016-be05-c0bf04cd2db8" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>주요 목적</strong></td><td id="}R}c" class="" style="width:251.15625px"><strong>인터넷 접속 및 네트워크 구축 (LAN)</strong></td><td id="Fmd=" class="" style="width:222.96875px"><strong>기기 간의 연결 (PAN)</strong></td></tr><tr id="30dddb6c-37bb-8082-884c-db066096052f" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>전송 속도</strong></td><td id="}R}c" class="" style="width:251.15625px">매우 빠름 (수백 Mbps ~ Gbps 단위)</td><td id="Fmd=" class="" style="width:222.96875px">상대적으로 느림 (최대 2~3 Mbps)</td></tr><tr id="30dddb6c-37bb-80a5-8e4a-e37df48e8e93" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>통신 거리</strong></td><td id="}R}c" class="" style="width:251.15625px">수십m ~ 건물 전체</td><td id="Fmd=" class="" style="width:222.96875px">보통 10m 내외</td></tr><tr id="30dddb6c-37bb-809b-928e-da818fa7224a" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>전력 소모</strong></td><td id="}R}c" class="" style="width:251.15625px">높음 (전력 소모가 큼)</td><td id="Fmd=" class="" style="width:222.96875px"><strong>매우 낮음</strong> (배터리 효율 최적화)</td></tr><tr id="30dddb6c-37bb-80eb-8f22-cd2a35f96f3e" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>주요 활용</strong></td><td id="}R}c" class="" style="width:251.15625px">노트북 인터넷, OTT 스트리밍, 홈 IoT</td><td id="Fmd=" class="" style="width:222.96875px">무선 이어폰, 마우스, 스마트워치</td></tr><tr id="30dddb6c-37bb-8099-a185-cde844697af5" dir="ltr"><td id="i@bP" class="" style="width:88px"><strong>동시 연결</strong></td><td id="}R}c" class="" style="width:251.15625px">수십 대의 기기 동시 접속 가능</td><td id="Fmd=" class="" style="width:222.96875px">여러 대의 기기<br/>(와이파이에 비해 제한적임)</td></tr></tbody></table><figure id="30dddb6c-37bb-8077-a848-c88e95a9bc85" dir="ltr"><div class="source"><a href="https://youtu.be/mPMGRILsOVk?si=KhroKdN6z4fqL9pv">https://youtu.be/mPMGRILsOVk?si=KhroKdN6z4fqL9pv</a></div></figure><h2 id="30dddb6c-37bb-809c-9f61-eef98a8ca8b6" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">🏷️ 와이파이 이름의 탄생 비화</h2><ol type="1" id="30dddb6c-37bb-8024-92a8-c767395ef3fd" class="numbered-list" start="1" dir="auto"><li><strong>원래 이름은 너무 딱딱함.</strong><br/>와이파이 기술의 본래 공식 명칭은 IEEE 802.11b Direct Sequence였음. 일반 소비자들이 기억하기엔 너무 어렵고 매력이 없었다고 생각함.</li></ol><ol type="1" id="30dddb6c-37bb-8052-9179-e1997a5bf932" class="numbered-list" start="2" dir="auto"><li><strong>마케팅 업체의 작품임</strong><br/>1999년, &#x27;와이파이 얼라이언스(Wi-Fi Alliance)&#x27;는 대중에게 친숙한 브랜드 이름을 만들기 위해 인터브랜드(Interbrand)라는 마케팅 컨설팅 업체에 의뢰함.</li></ol><ol type="1" id="30dddb6c-37bb-8010-bd97-f5d2aa7ac9cf" class="numbered-list" start="3" dir="auto"><li><strong>하이파이(Hi-Fi)에서 따온 이름임.</strong><br/>당시 고음질 오디오를 뜻하는 &#x27;Hi-Fi(High Fidelity)&#x27;가 대중에게 아주 익숙한 용어였음. 여기서 운율을 따와 &#x27;Wi-Fi&#x27;라는 이름을 만들게 된 것임.</li></ol><p id="30dddb6c-37bb-8038-9985-f9cbf063ee81" class="" dir="auto">
+</p><h2 id="30dddb6c-37bb-805a-b9a9-d40111825378" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">NFC vs RFID</h2><table id="30dddb6c-37bb-8047-a825-d26ac0af3b71" class="simple-table" dir="ltr"><tbody><tr id="30dddb6c-37bb-8075-aaf2-f0b5770d1c06" dir="ltr"><td id="BfUC" class=""><strong>구분</strong></td><td id="r^fv" class=""><strong>NFC (Near Field Communication)</strong></td><td id=":^EZ" class="" style="width:268px"><strong>RFID (Radio Frequency Identification)</strong></td></tr><tr id="30dddb6c-37bb-8086-9ab9-cf4358ece022" dir="ltr"><td id="BfUC" class=""><strong>정의</strong></td><td id="r^fv" class="">10cm 이내 근거리 무선 통신 (특화)</td><td id=":^EZ" class="" style="width:268px">무선 주파수를 이용한 식별 기술 (범용)</td></tr><tr id="30dddb6c-37bb-80f5-bb60-d343b292f156" dir="ltr"><td id="BfUC" class=""><strong>통신 거리</strong></td><td id="r^fv" class=""><strong>매우 짧음</strong> (10cm 이내)</td><td id=":^EZ" class="" style="width:268px"><strong>장거리 가능</strong> (수 미터 ~ 수십 미터)</td></tr><tr id="30dddb6c-37bb-80e3-9eae-ea2543e80b92" dir="ltr"><td id="BfUC" class=""><strong>통신 방향</strong></td><td id="r^fv" class=""><strong>양방향</strong> (기기 간 읽기/쓰기 모두 가능)</td><td id=":^EZ" class="" style="width:268px">단방향 (리더기가 태그를 읽기만 함)</td></tr><tr id="30dddb6c-37bb-80f0-9cc4-ebd2c0504840" dir="ltr"><td id="BfUC" class=""><strong>보안성</strong></td><td id="r^fv" class=""><strong>매우 높음</strong> (초근접 시에만 작동)</td><td id=":^EZ" class="" style="width:268px">상대적으로 낮음 (멀리서도 복제 가능성)</td></tr><tr id="30dddb6c-37bb-8015-ad61-d131944ab4ad" dir="ltr"><td id="BfUC" class=""><strong>주요 활용</strong></td><td id="r^fv" class=""><strong>삼성페이/애플페이</strong>, 교통카드, 도어락</td><td id=":^EZ" class="" style="width:268px">하이패스, 물류 창고 재고 관리, 도난 방지</td></tr></tbody></table><figure id="30dddb6c-37bb-8025-85b0-f2485b013b84" dir="ltr"><div class="source"><a href="https://youtu.be/m0wXeSxQj9I?si=zxf3lQhszEPCzddh">https://youtu.be/m0wXeSxQj9I?si=zxf3lQhszEPCzddh</a></div></figure><p id="30dddb6c-37bb-80e8-b806-ebc90038a1df" class="" dir="auto">
+</p><h2 id="30dddb6c-37bb-80de-b23c-cae360ca1f36" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">📊 한눈에 보는 역사 요약</h2><h3 id="30dddb6c-37bb-80c5-9b26-cfa189927733" class="" dir="auto">1. RFID의 탄생 (제2차 세계대전)</h3><p id="30dddb6c-37bb-804d-8d56-f4064f95ae31" class="" dir="auto">RFID의 개념은 <strong>제2차 세계대전</strong>으로 거슬러 올라감.</p><ul id="30dddb6c-37bb-809c-bf62-ff0347784566" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>배경:</strong> 당시 레이더로 비행기를 포착할 수는 있었지만, 이게 적군인지 아군인지 구별하기가 어려움.</li></ul><ul id="30dddb6c-37bb-8048-9982-c5ea4365f78f" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>해결책:</strong> 영국군은 아군 전투기에 &#x27;응답기(Transponder)&#x27;를 장착해 레이더 신호를 받으면 특정 신호를 다시 보내게 만듦. 이것이 최초의 <strong>IFF(Identification Friend or Foe, 적군/아군 식별)</strong> 시스템이며, 현대 RFID의 시초임.</li></ul><ul id="30dddb6c-37bb-80f7-85d6-f163e921ab7e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>상용화:</strong> 이후 1970~80년대에 이르러 가축 관리, 공장 자동화, 통행료 징수(하이패스 등) 등에 쓰이며 산업 전반으로 퍼짐.</li></ul><h3 id="30dddb6c-37bb-80b8-8944-ca169e68b20b" class="" dir="auto">2. NFC의 탄생 (2000년대 초반)</h3><p id="30dddb6c-37bb-8080-83b8-fa95ff1f7d40" class="" dir="auto">NFC는 RFID 중에서도 특정 주파수(13.56MHz)를 사용하는 기술을 바탕으로, <strong>기기 간 상호작용</strong>을 위해 2004년에 탄생함.</p><ul id="30dddb6c-37bb-80de-8cff-c3cdfd0e35ce" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>배경:</strong> 소니(Sony), 필립스(Philips, 현 NXP), 노키아(Nokia)가 손을 잡고 &quot;사람들이 스마트폰 하나로 결제도 하고 데이터도 주고받게 만들자&quot;며 표준을 세운 것이 시작임.</li></ul><ul id="30dddb6c-37bb-8073-8967-d40456a0830e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>차별점:</strong> 기존 RFID는 &#x27;읽기&#x27;만 하는 태그 위주였으나, NFC는 기기 자체가 리더도 되고 태그도 되는 <strong>양방향성</strong>을 갖도록 설계됨.</li></ul><p id="30dddb6c-37bb-8091-8825-d13bb9631927" class="" dir="auto">
+</p><h1 id="30dddb6c-37bb-8079-81d5-f907e9a713a0" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">네트워크 환경 구성</h1><h2 id="30dddb6c-37bb-807a-8194-ce85b7aed605" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">DHCP(Dynamic Host Configuration Protocol)</h2><ul id="30dddb6c-37bb-8011-b67c-dc114456ba74" class="bulleted-list" dir="auto"><li style="list-style-type:disc">네트워크에 접속하는 기기들에 <strong>IP 주소를 자동으로 할당해 주는 통신 규약, </strong>쉽게 비유하자면, 카페에 손님이 들어올 때마다 매니저가 빈 좌석(IP 주소)을 확인하고 &quot;손님은 5번 자리에 앉으세요&quot;라고 안내한 뒤, 손님이 떠나면 그 자리를 다시 비워두는 시스템과 같다.</li></ul><h2 id="30dddb6c-37bb-803a-ad89-fabe25b96d77" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">💡 왜 DHCP를 사용하나?</h2><ul id="30dddb6c-37bb-8033-9120-dd87916f2ea7" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>자동화:</strong> 수백 대의 컴퓨터가 있는 사무실에서 관리자가 일일이 수동으로 IP를 입력하는 번거로움을 없애준다.</li></ul><ul id="30dddb6c-37bb-8028-b20c-c7c4f6f1d4ea" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>IP 자원 관리:</strong> 한정된 IP 주소를 실제로 사용하는 기기에만 나눠주기 때문에 효율적이다.</li></ul><ul id="30dddb6c-37bb-805d-84cb-d9674af2fd3c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>이동성:</strong> 노트북이나 스마트폰을 들고 다른 층이나 다른 장소로 이동해도 네트워크 설정을 바꿀 필요 없이 즉시 인터넷이 가능하다.</li></ul><p id="30dddb6c-37bb-80c7-9e14-edb82b94d25d" class="" dir="auto">
+</p><h2 id="30dddb6c-37bb-807b-9a05-f5da9f410651" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">🌐 IP 주소의 정의 및 역할</h2><p id="30dddb6c-37bb-80a1-bedf-f134604055d2" class="" dir="auto"><strong>IP(Internet Protocol) 주소</strong>는 컴퓨터 네트워크에서 장치들이 서로를 식별하고 통신하기 위해 사용하는 <strong>고유한 식별 번호</strong>임. 현실 세계의 &#x27;집 주소&#x27;와 같은 역할을 수행함.</p><ul id="30dddb6c-37bb-80a9-852e-eba0d668c93e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>식별성:</strong> 네트워크에 연결된 모든 기기(PC, 스마트폰, 서버 등)에 부여됨.</li></ul><ul id="30dddb6c-37bb-8047-b7b5-dab741a90f87" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>전송 규약:</strong> 데이터 패킷이 목적지까지 정확히 배달되도록 경로를 지정함.</li></ul><ul id="30dddb6c-37bb-8029-9784-e34790db6517" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>체계:</strong> 현재 가장 많이 쓰이는 <strong>IPv4</strong>(32비트)와 주소 고갈 문제를 해결하기 위해 등장한 <strong>IPv6</strong>(128비트)로 나뉨.</li></ul><h2 id="30dddb6c-37bb-8085-9b29-f577a846681d" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto"><strong>📜 IP 주소의 역사적 스토리</strong></h2><p id="30dddb6c-37bb-80b2-ad9e-e20c03e79a73" class="" dir="auto"><strong><br/>1. 탄생의 배경 (1970년대)</strong><br/>• <strong>뿌리:</strong> 미 국방성 산하 고등연구계획국(ARPA)의 <strong>ARPANET</strong> 프로젝트에서 시작됨.<br/>• <strong>동기:</strong> 서로 다른 기종의 컴퓨터들이 표준화된 방식으로 데이터를 주고받기 위한 규약이 필요했음.<br/>• <strong>주역:</strong> &#x27;인터넷의 아버지&#x27;라 불리는 빈트 서프(Vint Cerf)와 로버트 칸(Robert Kahn)이 TCP/IP 설계를 주도함.</p><p id="30dddb6c-37bb-8050-a4e6-eb0fa0c68adc" class="" dir="auto"><strong><br/>2. IPv4의 표준화 (1981년)</strong><br/>• <strong>확정:</strong> 1981년 RFC 791 문서에 의해 <strong>IPv4</strong>가 공식 표준으로 채택됨.<br/>• <strong>한계점:</strong> 당시 설계자들은 약 <strong>43억 개</strong>(2^32)의 주소면 전 인류가 쓰기에 충분할 것이라 예상함.<br/>• <strong>예측 실패:</strong> 개인용 PC의 보급, 스마트폰의 등장, IoT(사물인터넷) 확산으로 인해 주소 부족 사태가 발생함.</p><p id="30dddb6c-37bb-802c-a3eb-ebdf30c2f3ab" class="" dir="auto"><strong><br/>3. 주소 고갈과 IPv6의 등장 (1990년대 후반~현재)</strong><br/>• <strong>위기:</strong> 2011년경 국제 인터넷 주소 관리 기구(IANA)에서 관리하는 IPv4 여유분이 사실상 바닥남.<br/>• <strong>해결책:</strong> 1998년 <strong>IPv6</strong>가 표준화되었으며, 이는 거의 무한대 개의 주소를 생성 가능함.</p><p id="31eddb6c-37bb-8096-b9ca-da57718f1866" class="" dir="auto"><strong>4. 인터넷 공급업체(ISP)의 IP 할당 전략</strong></p><table id="31eddb6c-37bb-8024-8507-c114e422743e" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-80fc-840b-e2053549446e" dir="ltr"><td id="&gt;ul|" class=""><strong>구분</strong></td><td id="ri{n" class=""><strong>유동 IP (Dynamic IP) 사용 이유</strong></td><td id="idkz" class=""><strong>사설 IP (Private IP) 사용 이유</strong></td></tr><tr id="31eddb6c-37bb-8088-bd59-d8bba55a2215" dir="ltr"><td id="&gt;ul|" class=""><strong>자원 효율성</strong></td><td id="ri{n" class="">접속 중인 사용자에게만 IP를 할당하여 <strong>한정된 주소를 돌려막기</strong> 함</td><td id="idkz" class="">공유기 1대에 공인 IP 1개만 부여하고, 수십 대의 기기는 <strong>가짜 주소</strong>로 해결</td></tr><tr id="31eddb6c-37bb-806f-ad82-e2b257653445" dir="ltr"><td id="&gt;ul|" class=""><strong>비용 관리</strong></td><td id="ri{n" class="">관리가 자동화되어 저렴하며, <strong>고정 IP는 기업용 유료 상품</strong>으로 판매</td><td id="idkz" class="">추가적인 공인 IP 확보 비용(구매 비용)을 획기적으로 절감</td></tr><tr id="31eddb6c-37bb-80ed-b059-f0ca5e03c33b" dir="ltr"><td id="&gt;ul|" class=""><strong>보안 측면</strong></td><td id="ri{n" class="">IP가 주기적으로 바뀌어 <strong>특정 기기를 타겟팅한 해킹</strong>이 어려움</td><td id="idkz" class="">외부에서 내부 기기로 직접 접속이 차단되는 <strong>1차 방어막(NAT)</strong> 형성</td></tr><tr id="31eddb6c-37bb-80f4-966a-d330f875a493" dir="ltr"><td id="&gt;ul|" class=""><strong>관리 편의성</strong></td><td id="ri{n" class="">사용자가 기기를 바꿀 때마다 설정을 바꿀 필요 없이 <strong>플러그 앤 플레이</strong> 가능</td><td id="idkz" class="">내부 네트워크(가정/회사) 관리를 사용자가 직접 하게 하여 ISP 부담 감소</td></tr></tbody></table><h2 id="30dddb6c-37bb-80c4-b362-d3fc162404b1" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">🌐 네트워크 설정 3대 요소</h2><h3 id="30dddb6c-37bb-8092-a0b9-e9ace21d0da9" class="" dir="auto">1. 서브넷 마스크 / 접두사 길이 (Subnet Prefix Length)</h3><p id="30dddb6c-37bb-804f-9240-ff1cf2fcb217" class="" dir="auto">네트워크의 &#x27;규모&#x27;와 &#x27;범위&#x27;를 결정하는 숫자임. </p><table id="31eddb6c-37bb-80b0-985d-ee50745a659b" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-80ac-963f-db751c032d58" dir="ltr"><td id="_y~k" class=""><strong>클래스</strong></td><td id="dP&gt;N" class=""><strong>기본 서브넷 마스크</strong></td><td id="&lt;cNA" class=""><strong>네트워크 범위 (앞부분)</strong></td><td id="BUCn" class=""><strong>최대 호스트 수</strong></td></tr><tr id="31eddb6c-37bb-804e-82cf-e9c6b478a1cb" dir="ltr"><td id="_y~k" class=""><strong>A 클래스</strong></td><td id="dP&gt;N" class=""><code>255.0.0.0</code></td><td id="&lt;cNA" class="">255.x.x.x</td><td id="BUCn" class="">16,777,214개</td></tr><tr id="31eddb6c-37bb-8079-a5af-ff3d14d17d71" dir="ltr"><td id="_y~k" class=""><strong>B 클래스</strong></td><td id="dP&gt;N" class=""><code>255.255.0.0</code></td><td id="&lt;cNA" class="">255.255.x.x</td><td id="BUCn" class="">65,534개</td></tr><tr id="31eddb6c-37bb-80f6-a48d-ee93fd0c6f31" dir="ltr"><td id="_y~k" class=""><strong>C 클래스</strong></td><td id="dP&gt;N" class=""><code>255.255.255.0</code></td><td id="&lt;cNA" class="">255.255.255.x</td><td id="BUCn" class="">254개</td></tr></tbody></table><table id="31bddb6c-37bb-8045-8cdc-c5149d88236f" class="simple-table" dir="ltr"><tbody><tr id="31bddb6c-37bb-8084-99a2-faf2246e9af3" dir="ltr"><td id="@uU\" class=""><strong>첫 번째 숫자 범위</strong></td><td id="MF;`" class=""><strong>클래스</strong></td><td id="|Bvr" class="" style="width:294px"><strong>용도 및 규모</strong></td></tr><tr id="31bddb6c-37bb-80e4-8b91-c3b8293a5f5a" dir="ltr"><td id="@uU\" class=""><strong>1 ~ 126</strong></td><td id="MF;`" class=""><strong>A 클래스</strong></td><td id="|Bvr" class="" style="width:294px">국가나 초거대 기업 (약 1,600만 개 주소)</td></tr><tr id="31bddb6c-37bb-804e-800b-f26fa2bc6283" dir="ltr"><td id="@uU\" class=""><strong>128 ~ 191</strong></td><td id="MF;`" class=""><strong>B 클래스</strong></td><td id="|Bvr" class="" style="width:294px">대학교나 대형 병원, 중견 기업 (약 6만 개 주소)</td></tr><tr id="31bddb6c-37bb-807d-949a-cff296b689ab" dir="ltr"><td id="@uU\" class=""><strong>192 ~ 223</strong></td><td id="MF;`" class=""><strong>C 클래스</strong></td><td id="|Bvr" class="" style="width:294px"><strong>소규모 사무실이나 가정용 (254개 주소)</strong></td></tr></tbody></table><ul id="30dddb6c-37bb-803c-9e2e-efd2f7e216ff" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>역할:</strong> 전체 IP 주소 중 어디까지가 &#x27;우리 동네(네트워크)&#x27;이고, 어디서부터가 &#x27;개별 기기(호스트)&#x27;인지를 구분하는 기준임.</li></ul><ul id="30dddb6c-37bb-80f0-96bf-fa3e365f5637" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>비유:</strong> &quot;서울시 강남구(네트워크)&quot;까지가 공통 주소이고, 그 뒤의 &quot;번지수(기기)&quot;가 각자의 번호임을 알려주는 경계선임.</li></ul><h3 id="31fddb6c-37bb-80db-afbb-d7f55ee9d79a" class="" dir="auto">🔍 직접 확인하는 방법</h3><p id="31fddb6c-37bb-8036-8f20-d19536416494" class="" dir="auto">윈도우 명령 프롬프트(CMD)에서 <code>ipconfig</code> 명령어를 입력하면 현재 내 PC에 설정된 이 세 가지 정보를 한눈에 확인할 수 있음.</p><p id="31fddb6c-37bb-8099-91c4-d618680be5e7" class="" dir="auto">본인의 위치에서 구글로 접속되는 실제 IP 주소를 확인하려면 다음 단계를 수행하면 됨.</p><ol type="1" id="31fddb6c-37bb-80be-b7a1-def52e11332c" class="numbered-list" start="1" dir="auto"><li><strong><a href="http://ip.pe.kr">ip.pe.kr</a></strong><strong> </strong></li></ol><ol type="1" id="31fddb6c-37bb-80a9-a2a7-c30df16b85e5" class="numbered-list" start="2" dir="auto"><li><a href="http://ipaddress.com/">IPAddress.com</a> </li></ol><ol type="1" id="31fddb6c-37bb-8060-9493-d49ae075e016" class="numbered-list" start="3" dir="auto"><li><strong><a href="http://whois.kisa.or.kr">whois.kisa.or.kr</a></strong><strong> </strong></li></ol><ol type="1" id="31fddb6c-37bb-80b6-962c-c9fd125c856c" class="numbered-list" start="4" dir="auto"><li><a href="https://www.browserscan.net/ko/ipcheck">https://www.browserscan.net/ko/ipcheck</a>  </li></ol><ol type="1" id="31fddb6c-37bb-8068-96b8-e0a27191b3fd" class="numbered-list" start="5" dir="auto"><li><a href="https://www.submarinecablemap.com/">https://www.submarinecablemap.com/</a>  </li></ol><h3 id="30dddb6c-37bb-801c-96e1-c3bedbe311f1" class="" dir="auto">2. 게이트웨이 (Default Gateway)</h3><p id="30dddb6c-37bb-80a3-b79c-d5bc3bd64653" class="" dir="auto">네트워크의 <strong>&#x27;출입문&#x27;</strong> 역할을 하는 장치(보통 공유기나 라우터)의 주소임.</p><ul id="30dddb6c-37bb-809f-89dc-fa6a5955c7b5" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>역할:</strong> 우리 동네(내부 네트워크)를 벗어나 외부 인터넷 세상으로 나갈 때 반드시 거쳐야 하는 통로임.</li></ul><ul id="30dddb6c-37bb-8041-928a-d33d6aeef609" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>특징:</strong> 내 컴퓨터가 외부 서버(구글, 네이버 등)에 접속하려면 모든 데이터 패킷을 일단 이 &#x27;게이트웨이&#x27; 주소로 보내야 함.</li></ul><ul id="30dddb6c-37bb-80c1-a34a-f1a8298886ff" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>비유:</strong> 아파트 단지에서 외부 도로로 나가기 위해 반드시 통과해야 하는 &#x27;정문 초소&#x27;와 같음.</li></ul><table id="31eddb6c-37bb-8096-b743-dc58781706e0" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-80c0-b0cb-ca11d9b06d8c" dir="ltr"><td id="t:=V" class=""><strong>구분</strong></td><td id="z\Qx" class="" style="width:278.8249969482422px"><strong>주요 내용</strong></td><td id="A\R:" class=""><strong>비유</strong></td></tr><tr id="31eddb6c-37bb-8056-8de1-d4deb3d492c9" dir="ltr"><td id="t:=V" class=""><strong>정의</strong></td><td id="z\Qx" class="" style="width:278.8249969482422px">서로 다른 네트워크를 연결하는 <strong>통로(관문)</strong></td><td id="A\R:" class="">아파트의 <strong>현관문</strong></td></tr><tr id="31eddb6c-37bb-80a0-957c-def9fffef037" dir="ltr"><td id="t:=V" class=""><strong>주요 장치</strong></td><td id="z\Qx" class="" style="width:278.8249969482422px">공유기(Router), L3 스위치, 전용 서버 등</td><td id="A\R:" class="">경비실 또는 안내 데스크</td></tr><tr id="31eddb6c-37bb-8035-af5b-dabbfa110db6" dir="ltr"><td id="t:=V" class=""><strong>핵심 역할</strong></td><td id="z\Qx" class="" style="width:278.8249969482422px">프로토콜 변환 및 외부 네트워크 데이터 전달</td><td id="A\R:" class="">타국으로 가는 <strong>출입국 관리소</strong></td></tr><tr id="31eddb6c-37bb-8096-9d79-fff8020e9ba0" dir="ltr"><td id="t:=V" class=""><strong>기본 주소</strong></td><td id="z\Qx" class="" style="width:278.8249969482422px">주로 네트워크의 첫 번째(<code>1</code>) 또는 마지막(<code>254</code>) 주소</td><td id="A\R:" class="">집 주소의 <strong>0번지</strong> 격</td></tr></tbody></table><h3 id="30dddb6c-37bb-8082-b10b-fc0d5ea9f476" class="" dir="auto">3. 기본 설정 DNS (Domain Name System)</h3><p id="30dddb6c-37bb-8088-9b0b-ff7725555f5c" class="" dir="auto">인터넷의 <strong>&#x27;전화번호부&#x27;</strong> 혹은 <strong>&#x27;주소록&#x27;</strong> 서버임.</p><ul id="30dddb6c-37bb-80c9-8d10-cd52bf7b416a" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>역할:</strong> 우리가 브라우저에 입력하는 문자로 된 주소(<a href="https://www.google.com/">www.google.com</a>)를 컴퓨터가 이해할 수 있는 숫자로 된 IP 주소(8.8.8.8)로 변환해 줌.</li></ul><ul id="30dddb6c-37bb-80e6-a613-e96e6c5f0574" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>특징:</strong> 이 설정이 잘못되면 인터넷 연결은 되어 있어도 웹사이트 이름을 검색해서 접속할 수 없게 됨.</li></ul><ul id="30dddb6c-37bb-8099-8369-cded58ce2a2f" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>비유:</strong> 친구의 이름을 검색하면 그 사람의 실제 전화번호를 알려주는 스마트폰의 &#x27;연락처&#x27; 앱과 같음.</li></ul><h3 id="31eddb6c-37bb-80c9-9bbc-e7d864941b63" class="" dir="auto">4. 고정 IP vs 유동 IP</h3><table id="31eddb6c-37bb-8005-885c-cc24b9d3ed62" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-80ff-a21e-dcf362f749ba" dir="ltr"><td id="SPZb" class=""><strong>구분</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px"><strong>고정 IP (Static IP)</strong></td><td id="jpzP" class="" style="width:268.6000061035156px"><strong>유동 IP (Dynamic IP)</strong></td></tr><tr id="31eddb6c-37bb-80b0-8d49-f53dfaf7b9f2" dir="ltr"><td id="SPZb" class=""><strong>개념</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px">사용자가 직접 주소를 할당하며 <strong>변하지 않음</strong></td><td id="jpzP" class="" style="width:268.6000061035156px">접속할 때마다 비어있는 주소를 <strong>자동 할당</strong></td></tr><tr id="31eddb6c-37bb-801b-b7d8-e6de9c3e30ad" dir="ltr"><td id="SPZb" class=""><strong>할당 방식</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px">수동 설정 (Manual)</td><td id="jpzP" class="" style="width:268.6000061035156px">자동 설정 (DHCP 서버 이용)</td></tr><tr id="31eddb6c-37bb-8031-a5a7-e28b768a2187" dir="ltr"><td id="SPZb" class=""><strong>주요 용도</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px">웹 서버, FTP 서버, VPN, CCTV 등</td><td id="jpzP" class="" style="width:268.6000061035156px">일반 가정용 PC, 스마트폰, 일반 사무실</td></tr><tr id="31eddb6c-37bb-80ca-87c3-fb55c5704809" dir="ltr"><td id="SPZb" class=""><strong>보안성</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px">주소가 노출되면 해킹 표적이 되기 쉬움</td><td id="jpzP" class="" style="width:268.6000061035156px">주소가 수시로 바뀌어 상대적으로 안전함</td></tr><tr id="31eddb6c-37bb-80f2-a9ea-e29e769e5dd1" dir="ltr"><td id="SPZb" class=""><strong>관리 편의성</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px">관리가 까다롭고 설정 오류 시 충돌 위험</td><td id="jpzP" class="" style="width:268.6000061035156px">관리가 매우 편리함 (장치만 연결하면 끝)</td></tr><tr id="31eddb6c-37bb-80d1-9a98-db9dec18512a" dir="ltr"><td id="SPZb" class=""><strong>비용</strong></td><td id="Sj_h" class="" style="width:278.5982208251953px">추가 비용 발생 (유료 서비스가 많음)</td><td id="jpzP" class="" style="width:268.6000061035156px">상대적으로 저렴하거나 기본 제공됨</td></tr></tbody></table><h3 id="31eddb6c-37bb-80e8-a1d2-c00ea0d19a0d" class="" dir="auto">5. 사설 IP vs 공인 IP</h3><table id="31eddb6c-37bb-8022-8d23-f2c9c21768dd" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-808f-8071-f5b6622ab8eb" dir="ltr"><td id="PE&gt;J" class=""><strong>구분</strong></td><td id="tp`Q" class="" style="width:179.9875030517578px"><strong>공인 IP (Public IP)</strong></td><td id="|SXq" class=""><strong>사설 IP (Private IP)</strong></td></tr><tr id="31eddb6c-37bb-803d-96a7-e736a6329fe4" dir="ltr"><td id="PE&gt;J" class=""><strong>할당 주체</strong></td><td id="tp`Q" class="" style="width:179.9875030517578px">인터넷 서비스 공급자(ISP)</td><td id="|SXq" class="">공유기(Router) 또는 네트워크 관리자</td></tr><tr id="31eddb6c-37bb-80c8-804b-dad1020b6480" dir="ltr"><td id="PE&gt;J" class=""><strong>접근성</strong></td><td id="tp`Q" class="" style="width:179.9875030517578px">인터넷 어디서든 접속 가능</td><td id="|SXq" class="">내부 네트워크에서만 접속 가능</td></tr><tr id="31eddb6c-37bb-8094-867b-c27013fb5ae1" dir="ltr"><td id="PE&gt;J" class=""><strong>중복 여부</strong></td><td id="tp`Q" class="" style="width:179.9875030517578px">전 세계에서 유일함</td><td id="|SXq" class="">다른 네트워크라면 중복 사용 가능</td></tr><tr id="31eddb6c-37bb-8000-83bf-ef2e960620a9" dir="ltr"><td id="PE&gt;J" class=""><strong>주소 범위</strong></td><td id="tp`Q" class="" style="width:179.9875030517578px">전 범위 (특정 대역 제외)</td><td id="|SXq" class=""><code>192.168.x.x</code>, <code>10.x.x.x</code>, <code>172.16.x.x</code></td></tr></tbody></table><h1 id="30dddb6c-37bb-80bb-bea8-ee2e54d3993e" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto"><strong>🚀 스타링크 관련  탐구 주제</strong></h1><p id="31eddb6c-37bb-8057-be9d-d1267f157891" class="" dir="auto"><strong><br/>1. 기술적 혁신: 저궤도 위성(LEO)과 지연 시간의 관계</strong><br/>• <strong>조사 내용:</strong> 기존 정지궤도(GEO) 위성과 스타링크 저궤도 위성의 고도 차이 비교 및 이로 인한 데이터 전송 속도(Latency) 개선 원리 분석.<br/>• <strong>핵심 포인트:</strong> 전파의 속도와 거리 계산($d = v \times t$)을 통해 왜 저궤도 방식이 온라인 게임이나 화상 회의에 더 적합한지 공학적 접근.</p><p id="30dddb6c-37bb-80ca-a717-d40e38619fb7" class="" dir="auto"><strong><br/>2. 정보 격차 해소: 디지털 소외 지역의 교육 및 의료 변화</strong><br/>• <strong>조사 내용:</strong> 인터넷 인프라가 부족한 오지, 섬, 개발도상국 마을에 스타링크가 도입된 후 변화된 교육 환경 및 의료 서비스 사례 조사.<br/>• <strong>핵심 포인트:</strong> &#x27;기술이 어떻게 사회적 불평등을 해결할 수 있는가&#x27;에 대한 인문사회적 관점에서의 고찰.</p><p id="30dddb6c-37bb-80f7-a7a2-f6485c40daa8" class="" dir="auto"><strong><br/>3. 우주 환경 이슈: 우주 쓰레기와 케슬러 증후군(Kessler Syndrome)</strong><br/>• <strong>조사 내용:</strong> 수만 개의 위성을 쏘아 올릴 때 발생하는 위성 간 충돌 위험성과 수명이 다한 위성의 처리 방식(대기권 재진입 연소 등)에 대해 조사.<br/>• <strong>핵심 포인트:</strong> 지속 가능한 우주 개발을 위한 국제적 규제와 스페이스X의 대응 기술을 비판적으로 분석.</p><p id="30dddb6c-37bb-80a1-aa33-c1d2a9b25414" class="" dir="auto"><strong><br/>4. 천문학적 갈등: 밤하늘 오염과 빛 공해 문제</strong><br/>• <strong>조사 내용:</strong> 스타링크 위성의 반사광이 지상 천문대의 우주 관측 및 천체 사진 촬영에 미치는 영향과 이를 줄이기 위한 기술적 시도(다크샛, 바이저샛 등) 조사.<br/>• <strong>핵심 포인트:</strong> &#x27;인류 전체의 자산인 밤하늘을 사기업이 점유할 수 있는가&#x27;에 대한 윤리적 논쟁 및 법적 쟁점 다룸.</p><table id="30dddb6c-37bb-80ff-a36a-e744d3042cf4" class="simple-table" dir="ltr"><tbody><tr id="30dddb6c-37bb-8095-bd26-f6f979f03f28" dir="ltr"><td id="`JyE" class=""><strong>주제</strong></td><td id="P&lt;am" class=""><strong>주요 분야</strong></td><td id="S;g@" class=""><strong>추천 대상</strong></td></tr><tr id="30dddb6c-37bb-804c-962b-c150b4504609" dir="ltr"><td id="`JyE" class=""><strong>1. 기술적 혁신</strong></td><td id="P&lt;am" class="">물리, 정보통신</td><td id="S;g@" class="">이공계 진로 희망자</td></tr><tr id="30dddb6c-37bb-808e-8fcb-d0a90e4eddea" dir="ltr"><td id="`JyE" class=""><strong>2. 정보 격차</strong></td><td id="P&lt;am" class="">사회, 경제</td><td id="S;g@" class="">인문/사회 진로 희망자</td></tr><tr id="30dddb6c-37bb-8088-bc39-f8da9a1021d9" dir="ltr"><td id="`JyE" class=""><strong>3. 우주 쓰레기</strong></td><td id="P&lt;am" class="">지구과학, 환경</td><td id="S;g@" class="">환경 보호 및 우주 공학 관심자</td></tr><tr id="30dddb6c-37bb-804e-b5b0-f07112cba2de" dir="ltr"><td id="`JyE" class=""><strong>4. 천문학/윤리</strong></td><td id="P&lt;am" class="">윤리, 법학, 천문</td><td id="S;g@" class="">융합적 사고 선호자</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

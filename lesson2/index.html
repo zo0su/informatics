@@ -1,0 +1,805 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[2차시] 사물 인터넷과 사회 변화 </title><meta name="data-notion-page-icon" content="🖥️"/><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%96%A5%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E"/><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><nav style="margin:16px 0;font-family:Malgun Gothic,sans-serif"><a href="../" style="color:rgb(55,53,47)">수업 목록</a></nav><article id="30dddb6c-37bb-8010-bf7b-f1766168e73d" class="page sans" data-notion-page-icon="🖥️"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1550346607-59e01007432d?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon" data-emoji="🖥️"></span></div><h1 class="page-title" dir="auto">[2차시] 사물 인터넷과 사회 변화 </h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h1 id="30dddb6c-37bb-80ce-b504-ff13b5de85df" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">📜 사물인터넷(IoT) 발전의 역사</h1><h2 id="30dddb6c-37bb-80ee-82a4-e38d45dc876c" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">1. 태동기: 아이디어의 시작 (1980년대 ~ 1990년대 초)</h2><ul id="30dddb6c-37bb-80f7-b9af-d32fbe14aa8b" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>최초의 IoT 기기(1982년):</strong> 카네기 멜런 대학교의 <strong>코카콜라 자판기</strong>. 학생들이 자판기에 센서를 달아 멀리서도 콜라의 재고와 온도(시원함 정도)를 네트워크로 확인한 것이 시초임.</li></ul><ul id="30dddb6c-37bb-80c9-816f-d750ebf5680c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>최초의 인터넷 연결 가전(1990년):</strong> 존 롬키(John Romkey)가 만든 인터넷 연결 토스터기. TCP/IP 프로토콜을 이용해 컴퓨터로 전원을 제어함.</li></ul><h2 id="30dddb6c-37bb-8084-a894-cdba2de2d25c" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">2. 명명기: &#x27;사물인터넷&#x27; 용어의 탄생 (1990년대 말)</h2><ul id="30dddb6c-37bb-80ab-90f8-c4813f00faa2" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>용어 정립(1999년):</strong> P&amp;G에서 근무하던 케빈 애쉬턴(Kevin Ashton)이 RFID(무선 식별) 기술을 공급망 관리에 도입하면서 &#x27;Internet of Things&#x27;라는 용어를 처음 제안함.</li></ul><ul id="30dddb6c-37bb-8029-9a6b-fbe83d8fa239" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>RFID의 발전:</strong> 사물에 식별 번호를 부여하고 이를 네트워크로 관리하려는 시도가 본격화됨.</li></ul><h2 id="30dddb6c-37bb-8090-9449-ca54b88e074a" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">3. 확산기: 대중화와 기술의 융합 (2000년대 ~ 2010년대 초)</h2><ul id="30dddb6c-37bb-80fe-8786-e075bfd80727" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>인터넷 냉장고(2000년):</strong> LG전자가 세계 최초로 인터넷 연결 냉장고를 출시하며 &#x27;스마트 홈&#x27;의 개념을 제시함.</li></ul><ul id="30dddb6c-37bb-808c-a5f8-e293b2e530a9" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>장치 수의 역전(2008~2009년):</strong> 전 세계 인터넷에 연결된 사물(기기)의 수가 전 세계 인구수를 추월하며 본격적인 IoT 시대가 열림.</li></ul><ul id="30dddb6c-37bb-8065-9ddc-ee6117d12cc9" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>IPv6 도입(2011년):</strong> 폭발적으로 늘어나는 기기들에 IP 주소를 부여하기 위해 무한대에 가까운 주소를 제공하는 IPv6 체계가 본격적으로 확산됨.</li></ul><h2 id="30dddb6c-37bb-8031-86e9-d73066723a55" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">4. 가속기: AI와 데이터의 결합 (2010년대 중반 ~ 현재)</h2><ul id="30dddb6c-37bb-80a5-bd1e-c464937e393d" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>플랫폼 경쟁:</strong> 구글(Nest 인수), 애플(HomeKit), 삼성(SmartThings) 등 거대 IT 기업들이 IoT 생태계를 구축함.</li></ul><ul id="30dddb6c-37bb-80ff-9811-d4186482bf1b" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>IIoT와 AIoT:</strong> 제조 현장의 산업용 사물인터넷(IIoT)과 인공지능이 결합한 사물지능(AIoT)으로 발전하여 자율주행, 스마트 시티 등으로 확장 중임.</li></ul><figure id="31eddb6c-37bb-8040-856c-c62940c1ff3d" dir="ltr"><div class="source"><a href="https://youtu.be/w8QbwdB-1hY?si=Z9qjfl7E9My4qMv4">https://youtu.be/w8QbwdB-1hY?si=Z9qjfl7E9My4qMv4</a></div></figure><p id="31eddb6c-37bb-80a7-a291-f504cbb2e315" class="" dir="auto">
+</p><h1 id="31eddb6c-37bb-801b-b685-feb5021afee1" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">📜 사물인터넷(IoT) 3대 핵심 요소</h1><table id="31eddb6c-37bb-80d6-8253-efa7566c5d39" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-80f7-b978-e4550873f948" dir="ltr"><td id="iYCp" class="" style="width:184.65625px"><strong>핵심 요소</strong></td><td id="Rjr;" class="" style="width:235.66666666666666px"><strong>주요 역할</strong></td><td id="aKeN" class="" style="width:486.65625px"><strong>구체적인 예시</strong></td></tr><tr id="31eddb6c-37bb-80c8-a766-cf96cf4e24df" dir="ltr"><td id="iYCp" class="" style="width:184.65625px"><strong>1. 센서 및 디바이스</strong><br/>(Sensors &amp; Devices)</td><td id="Rjr;" class="" style="width:235.66666666666666px">주변 환경의 데이터를 수집하고 물리적인 동작을 수행하는 <strong>&#x27;오감&#x27;</strong> 역할</td><td id="aKeN" class="" style="width:486.65625px">온도·습도 센서, GPS, 가속도 센서, 스마트 도어락, 웨어러블 기기</td></tr><tr id="31eddb6c-37bb-8022-8052-e6a24ccd28f4" dir="ltr"><td id="iYCp" class="" style="width:184.65625px"><strong>2. 네트워크</strong><br/>(Connectivity)</td><td id="Rjr;" class="" style="width:235.66666666666666px">수집된 데이터를 클라우드나 서버로 전달하는 <strong>&#x27;신경계&#x27;</strong> 역할</td><td id="aKeN" class="" style="width:486.65625px">Wi-Fi, 블루투스(Bluetooth), 5G/LTE, Zigbee, NFC</td></tr><tr id="31eddb6c-37bb-803d-9d7d-f88fe39fe7e2" dir="ltr"><td id="iYCp" class="" style="width:184.65625px"><strong>3. 서비스/인터페이스</strong><br/>(Intelligence/Service)</td><td id="Rjr;" class="" style="width:235.66666666666666px">데이터를 분석하여 최적의 판단을 내리고 사용자에게 가치를 제공하는 <strong>&#x27;두뇌&#x27;</strong> 역할</td><td id="aKeN" class="" style="width:486.65625px">스마트폰 앱 알림, 인공지능(AI) 분석, 자동 온도 조절 시스템, 빅데이터 시각화</td></tr></tbody></table><h1 id="30dddb6c-37bb-8071-9004-d4e680255275" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">🚀 자율주행차(IoT) 기반 탐구 주제</h1><h2 id="30dddb6c-37bb-80e8-8369-cae13e5bb434" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">1. 에지 컴퓨팅(Edge Computing)과 실시간 데이터 처리의 최적화</h2><ul id="30dddb6c-37bb-8053-ae03-f07e6e26b5d3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>탐구 동기:</strong> 자율주행차는 초당 수 기가바이트(GB)의 데이터를 생성함. 이를 모두 클라우드로 보내 처리하면 통신 지연(Latency)으로 인해 사고가 발생할 수 있음.</li></ul><ul id="30dddb6c-37bb-80b6-b7e8-f4926bf0b1a1" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>조사 내용:</strong> 차량 내부(Edge)에서 즉시 처리해야 할 데이터와 클라우드로 보내 학습시켜야 할 데이터를 구분하는 기준과 알고리즘 조사함.</li></ul><ul id="30dddb6c-37bb-80a5-9b98-f3d370b2172a" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>IoT 관점:</strong> 중앙 집중형 네트워크의 한계를 극복하는 분산 거점형 처리 방식의 효율성 분석함.</li></ul><figure id="31eddb6c-37bb-8055-8fbd-e5817469da7e" class="image" data-notion-image="%5B2%EC%B0%A8%EC%8B%9C%5D%20%EC%82%AC%EB%AC%BC%20%EC%9D%B8%ED%84%B0%EB%84%B7%EA%B3%BC%20%EC%82%AC%ED%9A%8C%20%EB%B3%80%ED%99%94/image.png" dir="ltr"><a href="%5B2%EC%B0%A8%EC%8B%9C%5D%20%EC%82%AC%EB%AC%BC%20%EC%9D%B8%ED%84%B0%EB%84%B7%EA%B3%BC%20%EC%82%AC%ED%9A%8C%20%EB%B3%80%ED%99%94/image.png"><img style="width:3999px" src="%5B2%EC%B0%A8%EC%8B%9C%5D%20%EC%82%AC%EB%AC%BC%20%EC%9D%B8%ED%84%B0%EB%84%B7%EA%B3%BC%20%EC%82%AC%ED%9A%8C%20%EB%B3%80%ED%99%94/image.png"/></a></figure><table id="31eddb6c-37bb-8012-b388-eff071ce54f9" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-80a4-bd41-c1b12b981d48" dir="ltr"><td id="lTfH" class="" style="width:135.125px"><strong>단계</strong></td><td id="|`\]" class=""><strong>역할</strong></td><td id="ef|^" class="" style="width:155.390625px"><strong>위치</strong></td><td id="z\XI" class="" style="width:309px"><strong>주요 작업</strong></td></tr><tr id="31eddb6c-37bb-8010-ae55-f6e235bdf39d" dir="ltr"><td id="lTfH" class="" style="width:135.125px"><strong>디바이스 (IoT)</strong></td><td id="|`\]" class="">데이터 생성</td><td id="ef|^" class="" style="width:155.390625px">사용자 주변</td><td id="z\XI" class="" style="width:309px">센싱, 기초 데이터 수집</td></tr><tr id="31eddb6c-37bb-80df-8ec3-fc513949b30c" dir="ltr"><td id="lTfH" class="" style="width:135.125px"><strong>엣지 (Edge)</strong></td><td id="|`\]" class=""><strong>실시간 분석</strong></td><td id="ef|^" class="" style="width:155.390625px">현장 서버, 게이트웨이</td><td id="z\XI" class="" style="width:309px">즉각적인 반응(정지 명령 등), 데이터 필터링</td></tr><tr id="31eddb6c-37bb-8080-b84a-f9b279d0373a" dir="ltr"><td id="lTfH" class="" style="width:135.125px"><strong>클라우드 (Cloud)</strong></td><td id="|`\]" class="">장기 저장 및 학습</td><td id="ef|^" class="" style="width:155.390625px">원격 데이터 센터</td><td id="z\XI" class="" style="width:309px">빅데이터 분석, AI 모델 업데이트, 전체 관리</td></tr></tbody></table><h3 id="31eddb6c-37bb-80cd-97b5-cf8b5a32c2cc" class="" dir="auto">자율주행 자동차의 경우</h3><table id="31eddb6c-37bb-80cd-92f4-e83aabeb86cd" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-805d-8955-df56dd19c3fe" dir="ltr"><td id="=&gt;zv" class=""><strong>구분</strong></td><td id="{sov" class=""><strong>발생 위치</strong></td><td id="e~@e" class=""><strong>주요 비유</strong></td><td id="^&lt;Xo" class=""><strong>핵심 판단 내용</strong></td></tr><tr id="31eddb6c-37bb-8088-8d17-d3e1067050d1" dir="ltr"><td id="=&gt;zv" class=""><strong>인-비히클 엣지</strong></td><td id="{sov" class=""><strong>차량 본체</strong></td><td id="e~@e" class="">&quot;운전자의 본능&quot;</td><td id="^&lt;Xo" class="">급제동, 조향, 물체 인식</td></tr><tr id="31eddb6c-37bb-808d-ade9-e912c875beb0" dir="ltr"><td id="=&gt;zv" class=""><strong>네트워크 엣지</strong></td><td id="{sov" class=""><strong>기지국 / 노변 장치</strong></td><td id="e~@e" class="">&quot;교통경찰 / 내비&quot;</td><td id="^&lt;Xo" class="">신호 정보, 사각지대 위험 알림</td></tr><tr id="31eddb6c-37bb-80c3-9a0d-cf1dbc487a65" dir="ltr"><td id="=&gt;zv" class=""><strong>클라우드</strong></td><td id="{sov" class=""><strong>중앙 데이터 센터</strong></td><td id="e~@e" class="">&quot;지도 제작소&quot;</td><td id="^&lt;Xo" class="">고정밀 지도 업데이트, AI 학습</td></tr></tbody></table><figure id="320ddb6c-37bb-80c9-88f3-ccfc533c92b8" dir="ltr"><div class="source"><a href="https://youtu.be/mVA0hi9Ji5A?si=KyHrEhJWNQ8gWyyG ">https://youtu.be/mVA0hi9Ji5A?si=KyHrEhJWNQ8gWyyG </a></div></figure><figure id="321ddb6c-37bb-8064-a2d3-e2a6d730dbbe" dir="ltr"><div class="source"><a href="https://youtu.be/3h1ZfLjF3RI?si=52BtE3CCM-xvwheo&amp;t=95">https://youtu.be/3h1ZfLjF3RI?si=52BtE3CCM-xvwheo&amp;t=95</a></div></figure><h2 id="30dddb6c-37bb-80bf-8614-e4bab928cf1d" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">2. V2X(Vehicle-to-Everything)를 활용한 스마트 시티 교통 제어</h2><ul id="30dddb6c-37bb-8070-8d7a-cae4e5b4a2de" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>탐구 동기:</strong> 자율주행차가 도로의 모든 사물(신호등, 다른 차량, 보행자)과 통신(IoT)한다면 교통 체증과 사고를 획기적으로 줄일 수 있음.</li></ul><ul id="30dddb6c-37bb-80bb-a152-ccf48f18665c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>조사 내용:</strong> V2V(차량 간), V2I(차량-인프라 간) 통신 표준을 조사하고, 신호등 없는 교차로에서 차량들이 서로 통신하여 순서대로 통과하는 시뮬레이션 원리 탐구함.</li></ul><ul id="30dddb6c-37bb-8000-a84c-c57040623b94" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>IoT 관점:</strong> 개별 사물이 군집 지능(Swarm Intelligence)을 형성하여 시스템 전체의 효율을 높이는 과정 고찰함.</li></ul><h2 id="30dddb6c-37bb-80fd-b7ab-e895b11a6906" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">3. 소프트웨어 중심 자동차(SDV)의 보안과 무선 업데이트(OTA)</h2><ul id="30dddb6c-37bb-8083-9630-ecdaefaf9fb2" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>탐구 동기:</strong> IoT 기기의 최대 취약점은 해킹임. 주행 중인 자동차의 제어권이 탈취될 경우 치명적인 결과를 초래함.</li></ul><ul id="30dddb6c-37bb-80ab-b329-de513ce40ba5" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>조사 내용:</strong> 테슬라와 같은 기업이 사용하는 OTA(Over-the-Air) 기술의 보안 프로토콜과 소프트웨어 업데이트를 통한 성능 개선 사례 조사함.</li></ul><ul id="30dddb6c-37bb-801a-a959-ec2a32c47c93" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>IoT 관점:</strong> 연결성이 강화될수록 중요해지는 사이버 보안 위협과 &#x27;안전한 연결&#x27;을 위한 암호화 기술(블록체인, 인증서 등) 탐구함.</li></ul><table id="30dddb6c-37bb-8027-a7da-c34bff02960d" class="simple-table" dir="ltr"><tbody><tr id="30dddb6c-37bb-80d6-837b-f3acc1076d76" dir="ltr"><td id="Kzf`" class=""><strong>주제</strong></td><td id="mteU" class=""><strong>추천 과목</strong></td><td id="bPKm" class="" style="width:268.453125px"><strong>탐구 방법론</strong></td><td id="UQ|o" class=""><strong>핵심 키워드</strong></td></tr><tr id="30dddb6c-37bb-80ae-8c1a-dd6d13241edc" dir="ltr"><td id="Kzf`" class=""><strong>에지 컴퓨팅</strong></td><td id="mteU" class="">정보, 물리</td><td id="bPKm" class="" style="width:268.453125px">데이터 전송 속도 및 지연 시간 계산 실험</td><td id="UQ|o" class="">Latency, 5G/6G, AI 반도체</td></tr><tr id="30dddb6c-37bb-800c-9548-e0e1a8ac8115" dir="ltr"><td id="Kzf`" class=""><strong>V2X/스마트 시티</strong></td><td id="mteU" class="">사회, 정보</td><td id="bPKm" class="" style="width:268.453125px">교통 시뮬레이션 프로그램(NetLogo 등) 활용</td><td id="UQ|o" class="">V2X, 초연결성, 지능형 교통 체계</td></tr><tr id="30dddb6c-37bb-80f4-8bb8-ddca8018a8f9" dir="ltr"><td id="Kzf`" class=""><strong>보안/OTA</strong></td><td id="mteU" class="">정보, 윤리</td><td id="bPKm" class="" style="width:268.453125px">해킹 사례 분석 및 보안 알고리즘 원리 파악</td><td id="UQ|o" class="">SDV, 해킹 방어, 사이버 윤리</td></tr></tbody></table><h1 id="30dddb6c-37bb-8091-ba9b-eef7fe0c4963" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">🛡️ IoT와 DDoS 공격: 탐구 주제 추천</h1><h2 id="30dddb6c-37bb-8091-864f-f9e0613ea251" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">1. 미라이(Mirai) 넷 사례를 통해 본 IoT 보안 취약점 분석</h2><ul id="30dddb6c-37bb-8072-9fa1-dc08d901e19e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>탐구 내용:</strong> 2016년 전 세계 인터넷을 마비시켰던 &#x27;미라이 보트넷&#x27; 사건을 중심으로, 초기 설정 비밀번호(admin/1234 등)가 어떻게 대규모 공격의 단초가 되었는지 조사함.</li></ul><ul id="30dddb6c-37bb-80af-a3c5-d434c4777914" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>핵심 포인트:</strong> IoT 기기들이 PC에 비해 보안 업데이트가 어렵고 연산 능력이 낮아 방어 체계가 부실하다는 &#x27;비대칭적 취약성&#x27;을 분석함.</li></ul><figure id="31eddb6c-37bb-802b-88bd-ef99b4329e4d" dir="ltr"><div class="source"><a href="https://youtu.be/KKSyB476n9o?si=uIKIoKFFlbxwvPP8&amp;t=32">https://youtu.be/KKSyB476n9o?si=uIKIoKFFlbxwvPP8&amp;t=32</a></div></figure><p id="31eddb6c-37bb-8063-97de-c72994106f47" class="" dir="auto">
+</p><h2 id="30dddb6c-37bb-8007-84c8-eb813ed7990b" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">2. IoT 기기의 &#x27;좀비화&#x27; 방지를 위한 가역적 보안 메커니즘 설계</h2><ul id="30dddb6c-37bb-8096-ab94-e1633ffa2373" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>탐구 내용:</strong> 사용자가 기기 보안을 관리하기 어려운 환경에서, 제조사 단계의 보안 강화 대책(기기별 고유 비밀번호 부여, 펌웨어 자동 업데이트 등)의 실효성을 탐구함.</li></ul><ul id="30dddb6c-37bb-8001-afc5-c866d1e69f8e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>핵심 포인트:</strong> &#x27;시큐어 부트(Secure Boot)&#x27;나 &#x27;하드웨어 기반 보안(TrustZone)&#x27; 기술이 어떻게 IoT 기기의 변조를 막는지 공학적으로 접근함.</li></ul><p id="31eddb6c-37bb-8040-adf6-f7db479beb85" class="" dir="auto">
+</p><h2 id="30dddb6c-37bb-8056-be5b-fd4aab642e7a" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">3. 트래픽 패턴 분석을 통한 IoT 기반 DDoS 공격 탐지 알고리즘</h2><ul id="30dddb6c-37bb-8086-a73b-c38fbf902632" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>탐구 내용:</strong> 정상적인 IoT 데이터 흐름과 공격 시 발생하는 비정상적 트래픽의 패턴 차이를 연구함. 인공지능(AI)을 활용하여 이상 징후를 조기에 발견하는 기술적 대책을 모색함.</li></ul><ul id="30dddb6c-37bb-80d5-8799-c5b3638bd1da" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>핵심 포인트:</strong> 네트워크 게이트웨이(공유기 등)에서 특정 기기의 트래픽이 급증할 때 이를 자동으로 차단하는 &#x27;침입 방지 시스템(IPS)&#x27;의 원리를 실험함.</li></ul><figure id="31eddb6c-37bb-8073-9a55-e1237c31ff64" dir="ltr"><div class="source"><a href="https://youtu.be/tRUcxyLI1DY?si=9Ahr8H1wh5NgpJGn&amp;t=41">https://youtu.be/tRUcxyLI1DY?si=9Ahr8H1wh5NgpJGn&amp;t=41</a></div></figure><p id="37cddb6c-37bb-808b-8ca9-faefa27794e3" class="" dir="auto">
+</p><p id="37cddb6c-37bb-80e9-99b5-d3b2825192c6" class="" dir="auto">
+</p><h1 id="37cddb6c-37bb-80d9-8f52-cd5df5baeef5" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">사물 인터넷 시스템 구현</h1><p id="37cddb6c-37bb-8088-a06a-d9ebb3e5f267" class="" dir="auto">
+</p><figure id="31eddb6c-37bb-809e-b5fa-d6ec4d022018" class="image" data-notion-image="%5B2%EC%B0%A8%EC%8B%9C%5D%20%EC%82%AC%EB%AC%BC%20%EC%9D%B8%ED%84%B0%EB%84%B7%EA%B3%BC%20%EC%82%AC%ED%9A%8C%20%EB%B3%80%ED%99%94/image%201.png" dir="ltr"><a href="%5B2%EC%B0%A8%EC%8B%9C%5D%20%EC%82%AC%EB%AC%BC%20%EC%9D%B8%ED%84%B0%EB%84%B7%EA%B3%BC%20%EC%82%AC%ED%9A%8C%20%EB%B3%80%ED%99%94/image%201.png"><img style="width:709.984375px" src="%5B2%EC%B0%A8%EC%8B%9C%5D%20%EC%82%AC%EB%AC%BC%20%EC%9D%B8%ED%84%B0%EB%84%B7%EA%B3%BC%20%EC%82%AC%ED%9A%8C%20%EB%B3%80%ED%99%94/image%201.png"/></a></figure><p id="31eddb6c-37bb-80b9-8c75-ccd41f93fee3" class="" dir="auto">
+</p><table id="31eddb6c-37bb-8057-9fdf-e3fb8779476e" class="simple-table" dir="ltr"><tbody><tr id="31eddb6c-37bb-801e-a878-c8e0097f36ed" dir="ltr"><td id="uYwf" class=""><strong>단계</strong></td><td id="a|Uo" class="" style="width:597px"><strong>주요 내용 및 아이디어 전개</strong></td><td id="?KOt" class="" style="width:212px"><strong>관련 요소 (IoT 3대 요소 적용)</strong></td></tr><tr id="31eddb6c-37bb-8038-a195-e0748a8eb930" dir="ltr"><td id="uYwf" class=""><strong>1. 문제 발견</strong></td><td id="a|Uo" class="" style="width:597px">학생마다 원하는 배식량이 다르지만 매번 말하기 번거롭고, 잔반이 발생하는 문제 인식</td><td id="?KOt" class="" style="width:212px"><strong>사용자 요구사항 분석</strong></td></tr><tr id="31eddb6c-37bb-806c-8f7b-de358683ef7e" dir="ltr"><td id="uYwf" class=""><strong>2. 데이터 수집</strong></td><td id="a|Uo" class="" style="width:597px"><strong>잔반 처리기</strong>에 설치된 카메라를 통해 개별 학생이 남기는 음식의 종류와 양을 기록</td><td id="?KOt" class="" style="width:212px"><strong>센서 및 디바이스</strong> (카메라/센서)</td></tr><tr id="31eddb6c-37bb-80ec-985c-c92e5a59e0d8" dir="ltr"><td id="uYwf" class=""><strong>3. 데이터 분석</strong></td><td id="a|Uo" class="" style="width:597px">수집된 지난 50일간의 데이터를 분석하여 학생별 식사 패턴 및 선호도 파악</td><td id="?KOt" class="" style="width:212px"><strong>지능형 서비스</strong> (빅데이터/AI)</td></tr><tr id="31eddb6c-37bb-804b-a6ec-f20609469d17" dir="ltr"><td id="uYwf" class=""><strong>4. 사물 인식</strong></td><td id="a|Uo" class="" style="width:597px">배식대에 선 학생(김OO, 박OO)을 얼굴 인식이나 태그 등으로 식별</td><td id="?KOt" class="" style="width:212px"><strong>네트워크 및 인터페이스</strong></td></tr><tr id="31eddb6c-37bb-80a0-abbe-ecd67082e9c3" dir="ltr"><td id="uYwf" class=""><strong>5. 맞춤형 실행</strong></td><td id="a|Uo" class="" style="width:597px">분석된 데이터를 바탕으로 로봇이 학생별 최적의 양(예: 쌀밥 300g, 국 최소 배식)을 자동으로 배부</td><td id="?KOt" class="" style="width:212px"><strong>지능형 서비스</strong> (자동 제어)</td></tr></tbody></table><h2 id="31eddb6c-37bb-8038-a8b7-ee0048abe9f3" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">🔄 시스템 작동 순서도 (Flowchart)</h2><ol type="1" id="31eddb6c-37bb-8079-9f87-e8815a57963b" class="numbered-list" start="1" dir="auto"><li><strong>[문제 정의]</strong> 급식 잔반 발생 및 개인별 맞춤 배식의 어려움</li></ol><ol type="1" id="31eddb6c-37bb-8075-b68b-cc7185d0cbaa" class="numbered-list" start="2" dir="auto"><li><strong>[데이터 축적]</strong> 잔반 처리기(센서)를 통해 50일간 학생별 식습관 데이터 수집</li></ol><ol type="1" id="31eddb6c-37bb-8074-84ad-dfe04e77218b" class="numbered-list" start="3" dir="auto"><li><strong>[대상 식별]</strong> 배식 로봇이 앞에 선 학생을 인식</li></ol><ol type="1" id="31eddb6c-37bb-80c0-8726-c0a1772fdfd5" class="numbered-list" start="4" dir="auto"><li><strong>[데이터 매칭]</strong> 클라우드/서버에 저장된 해당 학생의 선호도 데이터 호출</li></ol><ol type="1" id="31eddb6c-37bb-80fb-b6c0-d3d5e7017900" class="numbered-list" start="5" dir="auto"><li><strong>[자동 배식]</strong> 분석된 선호량에 맞춰 로봇 팔이 음식 배부</li></ol><ol type="1" id="31eddb6c-37bb-8008-8391-d64e4f8b7bc7" class="numbered-list" start="6" dir="auto"><li><strong>[피드백]</strong> 식사 후 잔반 데이터를 다시 수집하여 분석 모델 업데이트 (반복)</li></ol><h2 id="31eddb6c-37bb-8044-ab93-f9b182799c20" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">🔄 바이브 코딩의 순서도</h2><p id="31eddb6c-37bb-801c-8f31-e4867cb229fd" class="" dir="auto">단계별 내용 (AI에게 던질 질문들)</p><h3 id="31eddb6c-37bb-80db-a00c-cd0a6c83e796" class="" dir="auto"><strong>1단계: 시뮬레이션 환경 만들기</strong></h3><p id="31eddb6c-37bb-8037-8562-cfe5167aa89f" class="" dir="auto"><strong>학생 데이터를 분석하는 대시보드</strong>부터 만들기</p><blockquote id="31eddb6c-37bb-80a6-a5bd-f30f3802daaf" class="" dir="auto"><strong>AI 프롬프트 예시:</strong> &quot;학생별 50일간의 식사 데이터(남긴 양, 선호 음식)를 <mark class="highlight-yellow_background" data-notion-highlight="yellow_background"><strong>시뮬레이션하는 Python 프로그램</strong></mark>을 만들어줘. 김OO 학생은 밥 300g을 선호하고, 박OO 학생은 국을 싫어한다는 설정이야.&quot;</blockquote><h3 id="31eddb6c-37bb-803e-bc93-c0e9169e5d12" class="" dir="auto"><strong>2단계: 학생 인식 로직 추가 (이미지 기반)</strong></h3><p id="31eddb6c-37bb-80b4-bf33-fc41cc751b8e" class="" dir="auto">만화 속 로봇이 눈(카메라)으로 학생을 알아보는 기능을 가상으로 구현함.</p><blockquote id="31eddb6c-37bb-8063-9f6e-ed221fd40b30" class="" dir="auto"><strong>AI 프롬프트 예시:</strong> &quot;OpenCV 라이브러리를 사용해서 웹캠으로 사람 얼굴을 인식하면, 해당 학생의 이름을 화면에 띄우고 그 학생의 선호 배식량을 보여주는 코드를 작성해줘.&quot;</blockquote><h3 id="31eddb6c-37bb-8094-b22e-c9df6989f7ac" class="" dir="auto"><strong>3단계: 엣지 컴퓨팅 구조 설계</strong></h3><p id="31eddb6c-37bb-80ff-b124-d1ae45bb11e9" class="" dir="auto">속도를 위해 &#x27;현장&#x27;에서 처리하는 논리를 넣음.</p><blockquote id="31eddb6c-37bb-802b-b280-d7824b76e52e" class="" dir="auto"><strong>AI 프롬프트 예시:</strong> &quot;서버에 접속하지 않고 로컬 기기(엣지)에서 즉시 학생을 식별하고 배식량을 결정하는 구조로 코드를 최적화해줘. 반응 속도가 0.5초 이내여야 해.&quot;</blockquote><p id="321ddb6c-37bb-80b5-b8cc-ef908c3542f5" class="" dir="auto">
+</p><h2 id="320ddb6c-37bb-8086-8871-e883d6874836" class="" dir="auto">🔄 바이브 코딩 툴 추천, 구글 안티그래비티(<a href="https://antigravity.google/">https://antigravity.google/</a> ) </h2><table id="321ddb6c-37bb-808a-bea2-ca6201a712d8" class="simple-table" dir="ltr"><tbody><tr id="321ddb6c-37bb-80c0-a315-d6861b37404a" dir="ltr"><td id="wqYp" class=""><strong>핵심 가치</strong></td><td id="@wRQ" class=""><strong>안티그래비티의 기능적 대응</strong></td><td id="Xl&gt;I" class="" style="width:359.00001525878906px"><strong>바이브 코더가 얻는 이득</strong></td></tr><tr id="321ddb6c-37bb-802f-aced-f19624890076" dir="ltr"><td id="wqYp" class=""><strong>의도의 구체화</strong></td><td id="@wRQ" class=""><strong>Agentic Planning (자율 계획)</strong></td><td id="Xl&gt;I" class="" style="width:359.00001525878906px">&quot;이런 앱 만들어줘&quot;라고만 해도 AI가 구현 단계(DB 설계, UI, 로직)를 스스로 쪼개서 제안함.</td></tr><tr id="321ddb6c-37bb-80e2-996e-d73e3e1194d7" dir="ltr"><td id="wqYp" class=""><strong>맥락의 유지</strong></td><td id="@wRQ" class=""><strong>Gemini 3의 대용량 컨텍스트</strong></td><td id="Xl&gt;I" class="" style="width:359.00001525878906px">수천 줄의 코드와 기획 문서를 한꺼번에 이해하므로, 대화 도중 맥락이 끊기지 않음.</td></tr><tr id="321ddb6c-37bb-8067-9074-f9dc8624ec3d" dir="ltr"><td id="wqYp" class=""><strong>시각적 확인</strong></td><td id="@wRQ" class=""><strong>Live Artifacts &amp; Browser Control</strong></td><td id="Xl&gt;I" class="" style="width:359.00001525878906px">코드를 고칠 때마다 오른쪽 화면에서 실시간으로 변화를 확인하며 &#x27;느낌&#x27;을 즉시 교정 가능.</td></tr><tr id="321ddb6c-37bb-80e1-914c-ed5dd11f41af" dir="ltr"><td id="wqYp" class=""><strong>오류 자동 수정</strong></td><td id="@wRQ" class=""><strong>Self-Healing (자가 치유)</strong></td><td id="Xl&gt;I" class="" style="width:359.00001525878906px">실행 중 에러가 나면 AI가 터미널 로그를 읽고 스스로 고침. 사용자는 &quot;고쳐줘&quot;라고 말할 필요도 없음.</td></tr><tr id="321ddb6c-37bb-8026-85bc-e1822657f43e" dir="ltr"><td id="wqYp" class=""><strong>멀티태스킹</strong></td><td id="@wRQ" class=""><strong>Manager View (에이전트 관리)</strong></td><td id="Xl&gt;I" class="" style="width:359.00001525878906px">&quot;기획은 A가, 코딩은 B가, 테스트는 C가 해&quot;라고 시켜놓고 전체적인 방향성만 감독함.</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

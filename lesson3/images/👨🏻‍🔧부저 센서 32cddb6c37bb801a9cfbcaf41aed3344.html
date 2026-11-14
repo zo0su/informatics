@@ -1,0 +1,976 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>👨🏻‍🔧부저 센서</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><article id="32cddb6c-37bb-801a-9cfb-caf41aed3344" class="page sans"><header><h1 class="page-title" dir="auto">👨🏻‍🔧부저 센서</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h2 id="328ddb6c-37bb-8159-bf45-d40f2942d9bf" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">👨🏻‍🔧부저 센서</h2><figure id="328ddb6c-37bb-811f-80ab-cae213f01451" dir="ltr"><div class="block-color-orange source" data-notion-highlight="orange"><a href="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/3%EC%B0%A8%EC%8B%9C_%EC%84%BC%EC%84%9C%EC%8B%A4%EC%8A%B5%ED%95%98%EA%B8%B0(%EB%B6%80%EC%A0%80).pdf" data-notion-file="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/3%EC%B0%A8%EC%8B%9C_%EC%84%BC%EC%84%9C%EC%8B%A4%EC%8A%B5%ED%95%98%EA%B8%B0(%EB%B6%80%EC%A0%80).pdf" data-notion-file-alias="3차시_센서실습하기(부저).pdf">3차시_센서실습하기(부저).pdf</a></div></figure><h3 id="328ddb6c-37bb-81ff-bec7-c675394f0ecd" class="" dir="auto">수동 부저</h3><figure id="328ddb6c-37bb-814b-805a-cd2175420142" class="image" data-notion-image="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/image.png" dir="ltr"><a href="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/image.png"><img style="width:703.9874877929688px" src="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/image.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js" integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="328ddb6c-37bb-819f-938d-f862bda7b6e0" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">int Buzzer = 7;
+
+void setup() {
+  pinMode(Buzzer, OUTPUT);
+}
+
+void loop()
+{
+  tone(Buzzer, 523);
+  delay(500);
+  tone(Buzzer, 587);
+  delay(500);
+  tone(Buzzer, 659);
+  delay(500);
+}</code></pre><table id="328ddb6c-37bb-8116-9a48-eae4eae7aa28" class="simple-table" dir="ltr"><tbody><tr id="328ddb6c-37bb-8150-ba01-ecb5ace8a72d" dir="ltr"><td id="ajUo" class=""><strong>코드 라인</strong></td><td id="S~~U" class="" style="width:427px"><strong>설명</strong></td></tr><tr id="328ddb6c-37bb-812e-af2a-cf0293fa7ab9" dir="ltr"><td id="ajUo" class=""><code>int Buzzer = 7;</code></td><td id="S~~U" class="" style="width:427px">부저의 &#x27;+&#x27; 핀이 연결된 아두이노의 <strong>디지털 7번 핀</strong>을 변수로 지정합니다.</td></tr><tr id="328ddb6c-37bb-81d3-a033-c1ca5552dc1d" dir="ltr"><td id="ajUo" class=""><code>pinMode(Buzzer, OUTPUT);</code></td><td id="S~~U" class="" style="width:427px">7번 핀을 전기를 내보내는 <strong>출력 모드</strong>로 설정합니다.</td></tr><tr id="328ddb6c-37bb-81bb-a9e7-d37b53b04807" dir="ltr"><td id="ajUo" class=""><code>tone(Buzzer, 523);</code></td><td id="S~~U" class="" style="width:427px">부저에 <strong>523Hz(도)</strong> 주파수의 신호를 보냅니다.</td></tr><tr id="328ddb6c-37bb-810c-b501-ea2969e561e3" dir="ltr"><td id="ajUo" class=""><code>delay(500);</code></td><td id="S~~U" class="" style="width:427px">0.5초(500ms) 동안 해당 음을 유지하며 기다립니다.</td></tr></tbody></table><table id="328ddb6c-37bb-81d9-98b4-ceff2c7f0c47" class="simple-table" dir="ltr"><tbody><tr id="328ddb6c-37bb-8101-b323-f7d9ce58f449" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>음계</strong></td><td id="rt`{" class="" style="width:118px"><strong>4옥타브 (중간음)</strong></td><td id="LOCB" class="" style="width:123px"><strong>5옥타브 (높은음)</strong></td></tr><tr id="328ddb6c-37bb-819a-9abe-eeb8fcdab133" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>도 (C)</strong></td><td id="rt`{" class="" style="width:118px"><strong>262 Hz</strong></td><td id="LOCB" class="" style="width:123px"><strong>523 Hz</strong></td></tr><tr id="328ddb6c-37bb-81d7-b54f-eaae8ad127f5" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>레 (D)</strong></td><td id="rt`{" class="" style="width:118px">294 Hz</td><td id="LOCB" class="" style="width:123px">587 Hz</td></tr><tr id="328ddb6c-37bb-810c-b976-d58935773ef6" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>미 (E)</strong></td><td id="rt`{" class="" style="width:118px">330 Hz</td><td id="LOCB" class="" style="width:123px">659 Hz</td></tr><tr id="328ddb6c-37bb-8100-a515-ca81645b60de" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>파 (F)</strong></td><td id="rt`{" class="" style="width:118px">349 Hz</td><td id="LOCB" class="" style="width:123px">698 Hz</td></tr><tr id="328ddb6c-37bb-81eb-916f-e002182f5a2c" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>솔 (G)</strong></td><td id="rt`{" class="" style="width:118px">392 Hz</td><td id="LOCB" class="" style="width:123px">784 Hz</td></tr><tr id="328ddb6c-37bb-810f-8264-fd3f3c280211" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>라 (A)</strong></td><td id="rt`{" class="" style="width:118px">440 Hz</td><td id="LOCB" class="" style="width:123px">880 Hz</td></tr><tr id="328ddb6c-37bb-8116-83f4-de45a7ed7914" dir="ltr"><td id="=uAu" class="" style="width:79px"><strong>시 (B)</strong></td><td id="rt`{" class="" style="width:118px">494 Hz</td><td id="LOCB" class="" style="width:123px">988 Hz</td></tr></tbody></table><h3 id="328ddb6c-37bb-81d4-8ebc-e464ca98ce8a" class="" dir="auto">🏟️학교종이 땡땡땡 &lt;소스 코드&gt;</h3><pre id="328ddb6c-37bb-8149-93c5-df2e9f829f14" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">int Buzzer = 7;
+
+void setup() {
+  pinMode(Buzzer, OUTPUT);
+}
+
+void loop()
+{
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 440);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 440);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 329.63);
+  delay(1000);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 329.63);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 329.63);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 293.66);
+  delay(2000);
+  tone(Buzzer, 0);
+  delay(5);
+
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 440);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 440);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 329.63);
+  delay(1000);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 392);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 329.63);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 293.66);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 329.63);
+  delay(500);
+  tone(Buzzer, 0);
+  delay(5);
+  tone(Buzzer, 261.63);
+  delay(1500);
+  tone(Buzzer, 0);
+  delay(5);
+}</code></pre><h2 id="329ddb6c-37bb-80ae-95d5-d2b153a917ee" class="" dir="auto">🎼생일 축하합니다. &lt;소스 코드&gt;</h2><pre id="329ddb6c-37bb-8058-b2c9-e6ace2f7551d" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">int Buzzer = 7;
+
+void setup() {
+  pinMode(Buzzer, OUTPUT);
+}
+
+void loop() {
+  // 1. 생일 축하~ 합니다
+  playNote(392, 400); playNote(392, 100); // 솔솔
+  playNote(440, 500);                     // 라
+  playNote(392, 500);                     // 솔
+  playNote(523, 500);                     // 도(높은)
+  playNote(494, 1000);                    // 시
+  delay(300);
+
+  // 2. 생일 축하~ 합니다
+  playNote(392, 400); playNote(392, 100); // 솔솔
+  playNote(440, 500);                     // 라
+  playNote(392, 500);                     // 솔
+  playNote(587, 500);                     // 레(높은)
+  playNote(523, 1000);                    // 도(높은)
+  delay(300);
+
+  // 3. 사랑하는~ OO의
+  playNote(392, 400); playNote(392, 100); // 솔솔
+  playNote(784, 500);                     // 솔(아주 높은)
+  playNote(659, 500);                     // 미(높은)
+  playNote(523, 500);                     // 도(높은)
+  playNote(494, 500);                     // 시
+  playNote(440, 1000);                    // 라
+  delay(300);
+
+  // 4. 생일 축하~ 합니다
+  playNote(698, 400); playNote(698, 100); // 파(높은)파(높은)
+  playNote(659, 500);                     // 미(높은)
+  playNote(523, 500);                     // 도(높은)
+  playNote(587, 500);                     // 레(높은)
+  playNote(523, 1000);                    // 도(높은)
+
+  delay(5000); // 노래가 끝나고 5초간 대기
+}
+
+// 음 재생을 담당하는 사용자 정의 함수
+void playNote(int frequency, int duration) {
+  tone(Buzzer, frequency, duration);
+  delay(duration * 1.1); // 음 길이에 비례해서 약간의 간격을 둡니다
+  noTone(Buzzer);        // 확실하게 소리를 끊어줍니다
+}</code></pre><h3 id="328ddb6c-37bb-81e1-833e-cf5e3beda9b8" class="" dir="auto">능동 부저</h3><figure id="328ddb6c-37bb-8126-8b4e-fe6142427edd" class="image" data-notion-image="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/image%201.png" dir="ltr"><a href="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/image%201.png"><img style="width:703.9750366210938px" src="%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%94%A7%EB%B6%80%EC%A0%80%20%EC%84%BC%EC%84%9C/image%201.png"/></a></figure><pre id="328ddb6c-37bb-810d-8e20-f39405a80194" class="code code-wrap" data-notion-code-syntax="c"><code class="language-c" style="white-space:pre-wrap;word-break:break-all">int speakerPin = 8;
+
+void setup()
+{
+  pinMode(speakerPin, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(speakerPin, HIGH);
+  delay(1000);
+  digitalWrite(speakerPin, LOW);
+  delay(1000);
+}
+</code></pre><table id="328ddb6c-37bb-8139-9500-fdb878ccc6e8" class="simple-table" dir="ltr"><tbody><tr id="328ddb6c-37bb-8109-8498-dc8c7cf03b6c" dir="ltr"><td id="h:qY" class=""><strong>코드 라인</strong></td><td id="Jupn" class="" style="width:463px"><strong>설명</strong></td></tr><tr id="328ddb6c-37bb-81b9-93fd-dc0a7a7c638e" dir="ltr"><td id="h:qY" class=""><code>int speakerPin = 8;</code></td><td id="Jupn" class="" style="width:463px">부저를 아두이노 <strong>디지털 8번 핀</strong>에 연결하겠다고 선언합니다.</td></tr><tr id="328ddb6c-37bb-818b-b0cf-dea1e375fda6" dir="ltr"><td id="h:qY" class=""><code>pinMode(speakerPin, OUTPUT);</code></td><td id="Jupn" class="" style="width:463px">8번 핀을 전기를 보내는 출력용으로 설정합니다.</td></tr><tr id="328ddb6c-37bb-81ff-b5c1-d3cb3fbe7042" dir="ltr"><td id="h:qY" class=""><code>digitalWrite(speakerPin, HIGH);</code></td><td id="Jupn" class="" style="width:463px">8번 핀에 5V 전압을 보냅니다. 이때 능동 부저가 <strong>&quot;삐~&quot;</strong> 소리를 냅니다.</td></tr><tr id="328ddb6c-37bb-81a5-854d-fcc64b65be47" dir="ltr"><td id="h:qY" class=""><code>delay(1000);</code></td><td id="Jupn" class="" style="width:463px">소리를 <strong>1초</strong> 동안 유지합니다.</td></tr><tr id="328ddb6c-37bb-8128-b713-e0e7271f6ea4" dir="ltr"><td id="h:qY" class=""><code>digitalWrite(speakerPin, LOW);</code></td><td id="Jupn" class="" style="width:463px">전압을 0V로 차단합니다. 소리가 <strong>멈춥니다.</strong></td></tr><tr id="328ddb6c-37bb-8164-8a6b-db7270f62fe0" dir="ltr"><td id="h:qY" class=""><code>delay(1000);</code></td><td id="Jupn" class="" style="width:463px"><strong>1초</strong> 동안 정적을 유지합니다.</td></tr></tbody></table><table id="328ddb6c-37bb-81ec-80c1-f7d0369c90e7" class="simple-table" dir="ltr"><tbody><tr id="328ddb6c-37bb-81b9-89fe-c5bc8f3cd8c4" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>구분</strong></td><td id="rFc|" class="" style="width:203.3203125px"><strong>능동 부저 (Active Buzzer)</strong></td><td id="I^&gt;~" class="" style="width:253.5234375px"><strong>피에조/수동 부저 (Passive Buzzer)</strong></td></tr><tr id="328ddb6c-37bb-819d-8f8f-fddba8cf1a39" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>내부 구조</strong></td><td id="rFc|" class="" style="width:203.3203125px">발진 회로가 <strong>내장</strong>됨</td><td id="I^&gt;~" class="" style="width:253.5234375px">발진 회로가 <strong>없음</strong></td></tr><tr id="328ddb6c-37bb-8183-b145-ea80ad42185f" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>제어 방법</strong></td><td id="rFc|" class="" style="width:203.3203125px">전원만 공급 (HIGH/LOW)</td><td id="I^&gt;~" class="" style="width:253.5234375px">주파수 신호 입력 (<code>tone()</code> 함수)</td></tr><tr id="328ddb6c-37bb-812e-8e95-caaae994ba08" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>소리 특징</strong></td><td id="rFc|" class="" style="width:203.3203125px">단일 음당 고정된 소리 (&quot;삐~&quot;)</td><td id="I^&gt;~" class="" style="width:253.5234375px">다양한 높낮이 연주 가능 (도레미...)</td></tr><tr id="328ddb6c-37bb-8178-943a-fe1837166540" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>회로 복잡도</strong></td><td id="rFc|" class="" style="width:203.3203125px">매우 간단함</td><td id="I^&gt;~" class="" style="width:253.5234375px">상대적으로 복잡함 (신호 제어 필요)</td></tr><tr id="328ddb6c-37bb-816a-9078-ce0d2ed519bc" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>가격</strong></td><td id="rFc|" class="" style="width:203.3203125px">상대적으로 비쌈</td><td id="I^&gt;~" class="" style="width:253.5234375px">상대적으로 저렴함</td></tr><tr id="328ddb6c-37bb-8127-b944-d536cb653ae0" dir="ltr"><td id="xoMO" class="" style="width:102px"><strong>주요 용도</strong></td><td id="rFc|" class="" style="width:203.3203125px">단순 경보음, 알람, 확인음</td><td id="I^&gt;~" class="" style="width:253.5234375px">멜로디 연주, 전자 악기, 정밀 신호음</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
