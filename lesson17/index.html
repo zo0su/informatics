@@ -1,0 +1,1085 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[17차시] 파이썬 게임 제작</title><meta name="data-notion-page-icon" content="🧑🏻‍🚀"/><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%A7%91%F0%9F%8F%BB%E2%80%8D%F0%9F%9A%80%3C%2Ftext%3E%3C%2Fsvg%3E"/><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><nav style="margin:16px 0;font-family:Malgun Gothic,sans-serif"><a href="../" style="color:rgb(55,53,47)">수업 목록</a></nav><article id="33bddb6c-37bb-8085-956c-d39739f65dde" class="page sans" data-notion-page-icon="🧑🏻‍🚀"><header><div class="page-header-icon undefined"><span class="icon" data-emoji="🧑🏻‍🚀"></span></div><h1 class="page-title" dir="auto">[17차시] 파이썬 게임 제작</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h1 id="33bddb6c-37bb-80b1-bb21-e093bcc1b615" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">💻 게임 만들기 연습</h1><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="💡" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="344ddb6c-37bb-8083-9cb6-feea6fe6d61d" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="💡"></span></div><div style="width:100%"><p id="395ddb6c-37bb-801a-bb65-d5d5ae89e55b" class="" dir="auto">작동 과정 설명</p><ol type="1" id="395ddb6c-37bb-80aa-a912-c8d080e64aaf" class="numbered-list" start="1" dir="auto"><li>게임용 이미지, 사운드의 링크를  클릭하여,  images와 sounds 폴더를 다운로드 한다. </li></ol><ol type="1" id="395ddb6c-37bb-8050-8a0b-c98a3c3dd5e7" class="numbered-list" start="2" dir="auto"><li>파일탐색기를   연다. C\  → 사용자 →  본인좌석번호 폴더 이동</li></ol><ol type="1" id="395ddb6c-37bb-80c3-bbe3-f1a083980461" class="numbered-list" start="3" dir="auto"><li>images , sounds 폴더 게임 소스코드(.py) 파일을 복사한다.</li></ol><ol type="1" id="395ddb6c-37bb-8019-9477-ff1ef3f37a47" class="numbered-list" start="4" dir="auto"><li>하단의 pygame 구동하기의 단계를 차례로 진행한다. </li></ol></div></aside><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="💡" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="395ddb6c-37bb-8019-be11-c484100fa5f3" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="💡"></span></div><div style="width:100%"><h3 id="344ddb6c-37bb-80ff-8e37-f4dfe0821b39" class="" dir="auto"><strong>anaconda Command Prompt로 pygame 구동하기</strong></h3><p id="395ddb6c-37bb-8028-a4f7-e4119ee75ac9" class="" dir="auto">(1) <strong>conda init  <br/>: </strong>Anaconda를 터미널(Command Prompt)에서 정상적으로 인식하고 사용할 수 있도록 <strong>초기화(준비)하는 명령어</strong></p><p id="395ddb6c-37bb-8001-93ea-fed03638ccf3" class="" dir="auto">(2)<strong> conda activate<br/>: 기본 가상환경(</strong><code><strong>base</strong></code><strong>)을 활성화</strong>하는 명령어</p><p id="395ddb6c-37bb-8056-bc8b-d7424ab8abbe" class="" dir="auto">(3) <strong>conda create –n pygame_env python=3.10<br/>: </strong><code><strong>pygame_env</strong></code><strong>라는 이름의 가상환경을 만드는 명령어</strong></p><p id="395ddb6c-37bb-802c-ace9-e378f005956c" class="" dir="auto">(4) <strong>conda activate pygame_env<br/>: </strong>(3)번에서 만든 <code><strong>pygame_env</strong></code><strong> 가상환경(방) 안으로 들어가는 명령어</strong></p><p id="395ddb6c-37bb-8035-bcfb-d0655b1f7474" class="" dir="auto">(5) <strong>pip install pygame<br/>: </strong>활성화된 가상환경 안에서 파이썬 패키지 관리자인 <code>pip</code>를 사용해 <code><strong>pygame</strong></code><strong> 라이브러리를 다운로드하고 설치</strong>하는 명령어</p><p id="395ddb6c-37bb-8066-94e6-e62300dde408" class="" dir="auto">(6) <strong>python umbrella.py (umbrella = 게임 이름)<br/>: </strong>파이썬을 이용해 내가 작성한 <code><strong>tank.py</strong></code><strong>라는 이름의 게임 소스코드 파일을 실행</strong>하라는 명령어</p></div></aside><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="💡" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="395ddb6c-37bb-8020-803e-fd694d40c142" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="💡"></span></div><div style="width:100%"><h3 id="344ddb6c-37bb-8035-b012-f7e63806da6f" class="" dir="auto"><strong> 1. 비를 맞고 있는 남자(umbrella.py)</strong></h3><h3 id="344ddb6c-37bb-80e0-a4f3-fcdb00737881" class="" dir="auto"><strong>2. 우주 전쟁(space_invaders.py)</strong></h3><h3 id="344ddb6c-37bb-80d3-8522-c55f571d7339" class="" dir="auto"><strong>3. 파리 잡기(fly.py)</strong></h3><h3 id="344ddb6c-37bb-803b-8670-e048d2155f66" class="" dir="auto"><strong>4. 탱크 배틀 (tank.py)</strong></h3><h3 id="395ddb6c-37bb-80ca-a88b-ef48da1657f6" class="" dir="auto"><strong>5. 핑퐁(pong.py)</strong></h3><p id="395ddb6c-37bb-8055-88ae-e3826a6cb4b2" class="" dir="auto"><strong>         [왼쪽 플레이어]</strong></p><ul id="395ddb6c-37bb-809d-99b6-ce6f230e3104" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>위로 이동:</strong> <code>A</code> 키</li></ul><ul id="395ddb6c-37bb-808c-ab07-f9293422fe18" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>아래로 이동:</strong> <code>Z</code> 키</li></ul><ul id="395ddb6c-37bb-80aa-81c7-e8ce9f99d171" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>강타 기능:</strong> <code>Q</code> 키<br/><br/><strong>[오른쪽 플레이어]</strong></li></ul><ul id="395ddb6c-37bb-8084-8b93-ef98624b4e5c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>위로 이동:</strong> 방향키 위 (<code>↑</code> )</li></ul><ul id="395ddb6c-37bb-802d-a26c-fb024021ab1f" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>아래로 이동:</strong> 방향키 아래 (<code>↓</code> )</li></ul><ul id="395ddb6c-37bb-800a-bb92-fb3c5f6b44f6" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>강타f 기능:</strong> 오른쪽 시프트 키 (<code>Right Shift</code> )</li></ul></div></aside><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="💡" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="395ddb6c-37bb-80ed-8869-c709436062b1" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="💡"></span></div><div style="width:100%"><p id="344ddb6c-37bb-8000-96b3-e5ad592c740e" class="" dir="auto"><strong>[게임용 이미지, 사운드 링크(images, sounds)]</strong></p><p id="344ddb6c-37bb-803b-af31-cdaa1ba43b23" class="" dir="auto"><strong>이미지 다운로드 링크</strong></p><p id="395ddb6c-37bb-8015-889b-d7b61f2686bd" class="" dir="auto"><a href="https://drive.google.com/drive/folders/1628aEqvEtXWkVdCms10w1loGRkN20oBB?usp=sharing">https://drive.google.com/drive/folders/1628aEqvEtXWkVdCms10w1loGRkN20oBB?usp=sharing</a> </p><p id="344ddb6c-37bb-8071-a59f-e4751447c6f0" class="" dir="auto"><strong>사운드 다운로드 링크</strong></p><p id="344ddb6c-37bb-8017-ba0b-e1c08362c743" class="" dir="auto"><a href="https://drive.google.com/drive/folders/1jK53hRksb5CJqb4Z5w7Y23rPpFOeySUC?usp=sharing">https://drive.google.com/drive/folders/1jK53hRksb5CJqb4Z5w7Y23rPpFOeySUC?usp=sharing</a> <br/><br/><strong>[게임1_소스코드]</strong> umbrella.py (비를 맞고 있는 남자)</p><figure id="344ddb6c-37bb-805f-be66-ec09c96bdc0a" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1rBVX5GxdkLC2ZcgI-m2VzKqDZ-Su7nzd/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/1rBVX5GxdkLC2ZcgI-m2VzKqDZ-Su7nzd/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><p id="395ddb6c-37bb-8079-86e1-c59d49d6b45d" class="" dir="auto"><strong>[게임2_소스코드] </strong> space_invaders.py (우주 전쟁)</p><figure id="344ddb6c-37bb-80bd-86c8-e29dc20bb91b" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1RIyEK3twHdXsK1XNaGRkL0a-QP1W5Xe_/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/1RIyEK3twHdXsK1XNaGRkL0a-QP1W5Xe_/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><p id="395ddb6c-37bb-8068-bd07-e7d696691a4c" class="" dir="auto"><strong>[게임3_소스코드]</strong> fly.py (파리 잡기)</p><figure id="344ddb6c-37bb-8029-84d4-c5b2e5bd2be4" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1nytY6GYUFEBfLpFau1nSaCWFdrXIQZ00/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/1nytY6GYUFEBfLpFau1nSaCWFdrXIQZ00/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><p id="395ddb6c-37bb-809f-9f17-deb1ac91cf1a" class="" dir="auto"><strong>[게임4_소스코드] </strong>tank.py (탱크 배틀)</p><figure id="344ddb6c-37bb-807d-88ac-e5927c791b1c" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/19VUzIwgrm-45A500B3NqupsxyTVj59rA/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/19VUzIwgrm-45A500B3NqupsxyTVj59rA/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><p id="395ddb6c-37bb-808e-929e-d346e5e64dd8" class="" dir="auto"><strong>[게임5_소스코드] </strong>ping.py (핑퐁)</p><figure id="344ddb6c-37bb-805a-8634-e27068604579" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/17D7HX-HboQHwG6NP7UOkJfU8TeRuDKDP/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/17D7HX-HboQHwG6NP7UOkJfU8TeRuDKDP/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure></div></aside><h1 id="344ddb6c-37bb-8067-b274-e74b8ee845da" class="block-color-orange_background" data-notion-highlight="orange_background" dir="auto">🛸게임 만들기 실전(레이싱 카)</h1><p id="344ddb6c-37bb-8015-b1b0-d21969ca1418" class="" dir="auto">첨부한 소스파일을 기초로 하여 본인이 추가할 수 있는 기능을 더해서 만듭니다.</p><p id="344ddb6c-37bb-80c9-9d26-d360276a7f5b" class="" dir="auto">[과제로 첨부할 파일 3가지]</p><p id="344ddb6c-37bb-80c2-9dcd-e1681ef17e49" class="" dir="auto">1. 레이싱 게임 : 학번_성명.py</p><p id="344ddb6c-37bb-806f-b847-f2ab511a691d" class="" dir="auto">2. 게임에 본인이 수정하거나 추가한 내용 : 학번_성명.docs</p><p id="344ddb6c-37bb-809e-aee0-d8e5fad8e26c" class="" dir="auto">3. 추가한 이미지(images)나 소리(sound) 파일 : 학번_성명.zip</p><h4 id="396ddb6c-37bb-8061-8207-c1237930a825" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">cars.zip</h4><p id="395ddb6c-37bb-80d8-a45b-e30ca2dc8e31" class="" dir="auto"><a href="https://drive.google.com/file/d/1X1W8wSn7IyimH7vstAo5d6kLPv1C6hXF/view?usp=sharing">https://drive.google.com/file/d/1X1W8wSn7IyimH7vstAo5d6kLPv1C6hXF/view?usp=sharing</a></p><h4 id="396ddb6c-37bb-80c9-bdb7-f392cab6fbce" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">sounds.zip</h4><figure id="396ddb6c-37bb-80d5-8653-e5f90abf135c" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/143hDBKh_aV0ORAdGQ0p8mc1g6e6svVla/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/143hDBKh_aV0ORAdGQ0p8mc1g6e6svVla/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><h2 id="395ddb6c-37bb-804f-b317-dce467cc1f27" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">전체 소스 코드(racing_car.py)</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="395ddb6c-37bb-8096-bf49-e0d8ce611da2" class="code code-wrap" data-notion-code-syntax="python"><code class="language-python" style="white-space:pre-wrap;word-break:break-all">import sys
+import pygame
+import random
+
+# 게임 화면 크기
+WINDOW_WIDTH = 550
+WINDOW_HEIGHT = 800
+
+# 색상
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GRAY = (150, 150, 150)
+
+# 소스 디렉토리
+DIRCARS = &quot;cars/&quot;
+DIRSOUND = &quot;sounds/&quot;  # 사운드 폴더명
+
+# 기본 전역 변수 초기화
+STAGE = 1
+CAR_COUNT = 5
+SCORE = 0
+STAGESCORE = 0
+STAGESTAIR = 1000
+PNUMBER = 5  # 플레이어 Life 갯수
+
+# 자동차 오브젝트를 저장할 List
+CARS = []
+SCREEN = None  # main에서 초기화
+LIFE_IMAGE = None  # 라이프 표시용 이미지를 미리 저장할 전역 변수
+
+
+class Car:
+    car_image = [
+        &#x27;Car01.png&#x27;, &#x27;Car02.png&#x27;, &#x27;Car03.png&#x27;, &#x27;Car04.png&#x27;, &#x27;Car05.png&#x27;,
+        &#x27;Car06.png&#x27;, &#x27;Car07.png&#x27;, &#x27;Car08.png&#x27;, &#x27;Car09.png&#x27;, &#x27;Car10.png&#x27;,
+        &#x27;Car11.png&#x27;, &#x27;Car12.png&#x27;, &#x27;Car13.png&#x27;, &#x27;Car14.png&#x27;, &#x27;Car15.png&#x27;,
+        &#x27;Car16.png&#x27;, &#x27;Car17.png&#x27;, &#x27;Car18.png&#x27;, &#x27;Car19.png&#x27;, &#x27;Car20.png&#x27;,
+        &#x27;Car21.png&#x27;, &#x27;Car22.png&#x27;, &#x27;Car23.png&#x27;, &#x27;Car24.png&#x27;, &#x27;Car25.png&#x27;,
+        &#x27;Car26.png&#x27;, &#x27;Car27.png&#x27;, &#x27;Car28.png&#x27;, &#x27;Car29.png&#x27;, &#x27;Car30.png&#x27;,
+        &#x27;Car31.png&#x27;, &#x27;Car32.png&#x27;, &#x27;Car33.png&#x27;, &#x27;Car34.png&#x27;, &#x27;Car35.png&#x27;,
+        &#x27;Car36.png&#x27;, &#x27;Car37.png&#x27;, &#x27;Car38.png&#x27;, &#x27;Car39.png&#x27;, &#x27;Car40.png&#x27;
+    ]
+   
+    def __init__(self, x=0, y=0, dx=0, dy=0):
+        self.image = None
+        self.x = x
+        self.y = y
+        self.dx = dx
+        self.dy = dy
+        self.rect = None
+       
+    def load_car(self, p=&quot;&quot;):
+        if p == &quot;p&quot;:
+            # 플레이어 차량
+            self.image = pygame.image.load(DIRCARS + &quot;Player.png&quot;)
+            self.image = pygame.transform.scale(self.image, (40, 102))
+            self.rect = self.image.get_rect()
+            self.rect.x = self.x
+            self.rect.y = self.y
+        else:
+            # 상대방 자동차
+            self.image = pygame.image.load(DIRCARS + random.choice(self.car_image))
+            self.rect = self.image.get_rect()
+           
+            if self.rect.width &lt;= 55:
+                carwidth = self.rect.width - 15
+                carheight = round((self.rect.height * carwidth) / self.rect.width)
+            else:
+                carwidth = self.rect.width
+                carheight = self.rect.height
+               
+            self.image = pygame.transform.scale(self.image, (carwidth, carheight))
+            self.rect.width = carwidth
+            self.rect.height = carheight
+           
+            self.rect.x = random.randrange(0, WINDOW_WIDTH - self.rect.width)
+            self.rect.y = random.randrange(-150, -50)
+           
+            speed = STAGE + 5
+            if speed &gt; 15:
+                speed = 15
+            self.dy = random.randint(5, speed)
+       
+    def draw_car(self):
+        SCREEN.blit(self.image, [self.rect.x, self.rect.y])
+
+    def move_x(self):
+        self.rect.x += self.dx
+
+    def move_y(self):
+        self.rect.y += self.dy
+       
+    def check_screen(self):
+        if self.rect.left &lt; 0:
+            self.rect.left = 0
+        if self.rect.right &gt; WINDOW_WIDTH:
+            self.rect.right = WINDOW_WIDTH
+        if self.rect.top &lt; 0:
+            self.rect.top = 0
+        if self.rect.bottom &gt; WINDOW_HEIGHT:
+            self.rect.bottom = WINDOW_HEIGHT
+           
+    def check_collision(self, car, distance=0):
+        if (self.rect.top + distance &lt; car.rect.bottom) and \
+           (car.rect.top &lt; self.rect.bottom - distance) and \
+           (self.rect.left + distance &lt; car.rect.right) and \
+           (car.rect.left &lt; self.rect.right - distance):
+            return True
+        else:
+            return False
+
+def increase_score():
+    global SCORE, STAGE, STAGESCORE
+    SCORE += 10
+   
+    if STAGE == 1:
+        stair = STAGESTAIR
+    else:
+        stair = (STAGE - 1) * STAGESTAIR
+       
+    if SCORE &gt;= STAGESCORE + stair:
+        STAGE += 1
+        STAGESCORE = STAGESCORE + stair
+
+def draw_score():
+    font_01 = pygame.font.SysFont(&quot;FixedSys&quot;, 30, True, False)
+   
+    # SCORE 기록
+    text_score = font_01.render(&quot;Score : &quot; + str(SCORE), True, BLACK)
+    SCREEN.blit(text_score, [15, 15])
+
+    # STAGE 기록
+    text_stage = font_01.render(&quot;STAGE : &quot; + str(STAGE), True, BLACK)
+    text_stage_rect = text_stage.get_rect()
+    text_stage_rect.centerx = round(WINDOW_WIDTH / 2)
+    SCREEN.blit(text_stage, [text_stage_rect.x, 15])
+
+    # 플레이어 Life 기록
+    global PNUMBER, LIFE_IMAGE
+    
+    # [수정] 5개까지만 이미지를 그리고, 초과분은 반복문 밖에서 한 번만 텍스트 처리
+    display_lives = min(PNUMBER, 5)
+    for i in range(display_lives):
+        if LIFE_IMAGE:
+            px = WINDOW_WIDTH - 20 - (i * 30)
+            SCREEN.blit(LIFE_IMAGE, [px, 15])
+            
+    if PNUMBER &gt; 5:
+        text_pnumber = font_01.render(&quot;+&quot; + str(PNUMBER - 5), True, BLACK)
+        text_pnumber_x = WINDOW_WIDTH - 30 - (5 * 30)
+        SCREEN.blit(text_pnumber, [text_pnumber_x, 15])
+
+def main():
+    global SCREEN, CAR_COUNT, WINDOW_WIDTH, WINDOW_HEIGHT, PNUMBER, LIFE_IMAGE
+
+    pygame.init()
+    SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT),
+                                     pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.RESIZABLE)
+   
+    pygame.display.set_caption(&quot;Racing Car Game&quot;)
+   
+    # [수정] NameError 방지를 위해 사운드 변수 미리 초기화
+    sound_crash = None
+    mixer_initialized = False
+    
+    try:
+        pygame.mixer.init()
+        mixer_initialized = True
+    except Exception as e:
+        print(f&quot;오디오 장치 초기화 실패 (소리 없이 게임이 실행됩니다): {e}&quot;)
+   
+    # 투명 아이콘 설정
+    try:
+        windowicon = pygame.image.load(DIRCARS + &#x27;icon.png&#x27;).convert_alpha()
+        pygame.display.set_icon(windowicon)
+    except:
+        pass
+
+    clock = pygame.time.Clock()
+   
+    # 라이프 표시용 이미지 미리 한 번만 로드하기
+    try:
+        LIFE_IMAGE = pygame.image.load(DIRCARS + &#x27;Player.png&#x27;)
+        LIFE_IMAGE = pygame.transform.scale(LIFE_IMAGE, (15, 38))
+    except:
+        LIFE_IMAGE = None
+
+    # 사운드 파일 로드
+    if mixer_initialized:
+        try:
+            pygame.mixer.music.load(DIRSOUND + &#x27;background.ogg&#x27;)
+            pygame.mixer.music.play(-1)
+            sound_crash = pygame.mixer.Sound(DIRSOUND + &#x27;crash.ogg&#x27;)
+        except Exception as e:
+            print(f&quot;사운드 파일 로드 실패 (파일 확인 필요): {e}&quot;)
+
+    # 플레이어 자동차 생성
+    player = Car(round(WINDOW_WIDTH / 2), round(WINDOW_HEIGHT - 150), 0, 0)
+    player.load_car(&quot;p&quot;)
+
+    # 자동차 생성
+    for i in range(CAR_COUNT):
+        car = Car(0, 0, 0, 0)
+        car.load_car()
+        CARS.append(car)
+       
+    playing = True
+
+    while playing:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                playing = False
+                pygame.quit()
+                sys.exit()
+               
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    player.dx = 5
+                elif event.key == pygame.K_LEFT:
+                    player.dx = -5
+                if event.key == pygame.K_DOWN:
+                    player.dy = 5
+                elif event.key == pygame.K_UP:
+                    player.dy = -5
+                   
+            if event.type == pygame.KEYUP:
+                if event.key in [pygame.K_RIGHT, pygame.K_LEFT]:
+                    player.dx = 0
+                if event.key in [pygame.K_DOWN, pygame.K_UP]:
+                    player.dy = 0
+                   
+        SCREEN.fill(GRAY)
+       
+        # 플레이어 업데이트
+        player.move_x()
+        player.move_y()
+        player.check_screen()
+        player.draw_car()
+       
+        # 다른 자동차들 움직이기
+        for i in range(CAR_COUNT):
+            CARS[i].move_y()
+            CARS[i].draw_car()
+           
+            if CARS[i].rect.y &gt; WINDOW_HEIGHT:
+                increase_score()
+                CARS[i].load_car()
+               
+        # 상대 자동차들끼리 충돌 감지
+        for i in range(CAR_COUNT):
+            for j in range(i + 1, CAR_COUNT):
+                if CARS[i].check_collision(CARS[j]):
+                    if CARS[i].rect.x &gt; CARS[j].rect.x:
+                        CARS[i].rect.x += 4
+                        CARS[j].rect.x -= 4
+                    else:
+                        CARS[i].rect.x -= 4
+                        CARS[j].rect.x += 4
+                       
+                    if CARS[i].rect.y &gt; CARS[j].rect.y:
+                        CARS[i].rect.y += CARS[i].dy
+                        CARS[j].rect.y -= CARS[j].dy
+                    else:
+                        CARS[i].rect.y -= CARS[j].dy
+                        CARS[j].rect.y += CARS[i].dy
+                       
+        # 플레이어와 다른 차량 충돌 감지
+        for i in range(CAR_COUNT):
+            if player.check_collision(CARS[i], 5):
+                PNUMBER -= 1
+                if sound_crash:  # 이제 안전하게 체크 가능합니다.
+                    sound_crash.play()
+               
+                CARS[i].load_car()
+                   
+        # 게임 종료 조건
+        if PNUMBER &lt;= 0:
+            print(&quot;Game Over!&quot;)
+            playing = False
+
+        draw_score()
+        pygame.display.flip()
+        clock.tick(60)
+
+    pygame.quit()
+
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre><h2 id="344ddb6c-37bb-80f6-87cb-f6ec4d838ab8" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">[1차시] 클래스를 이용하여 다수의 자동차 만들기</h2><figure id="344ddb6c-37bb-80e6-91ec-c8155411f274" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1FpZBCJ1QftAfXLm1oXhHmzV2KvDwZDjS/view?usp=sharing" data-notion-file="https://drive.google.com/file/d/1FpZBCJ1QftAfXLm1oXhHmzV2KvDwZDjS/view?usp=sharing" data-notion-file-alias="view?usp=sharing">view?usp=sharing</a></div></figure><h3 id="395ddb6c-37bb-80c4-8b14-f104729590b6" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">1. 클래스 시작, 다수의 자동차 이미지 List로 저장하기</h3><h3 id="395ddb6c-37bb-80c5-a684-dc72de7582e8" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">2. Class의 초기 작업</h3><h3 id="395ddb6c-37bb-801d-a2c5-e84ad6e1ce75" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">3. 자동차 이미지 불러오기</h3><h3 id="395ddb6c-37bb-80fc-8b25-e58d04a7f14d" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">4. 자동차 이미지 그리기 및 움직임 제어</h3><h3 id="395ddb6c-37bb-8088-af4c-cf636627a0f8" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">5. 자동차 스크린 밖으로 나가지 못하게 하 기</h3><h3 id="395ddb6c-37bb-80dd-873f-fc465814a0cf" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">6. 자동차 충돌 감지</h3><h3 id="395ddb6c-37bb-8054-bf71-edaab4c59d65" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">7. main 함수를 만들어서 게임 루프 생성</h3><h2 id="344ddb6c-37bb-802e-a6d6-fe12238c53a6" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">[2차시] 플레이어 자동차 만들기</h2><figure id="344ddb6c-37bb-80b9-a4fa-df3a00d9e836" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1MaPqghqoh7IzAvZT9TPcF8ARmLIHC44z/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/1MaPqghqoh7IzAvZT9TPcF8ARmLIHC44z/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><h3 id="395ddb6c-37bb-80c7-83f5-e404d6190d35" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">1. 자동차를 스크린에 그리기 </h3><h2 id="344ddb6c-37bb-80e5-9640-db8d11c6c338" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">[3차시] 점수 기록하기</h2><figure id="344ddb6c-37bb-8066-8fbd-d9276d13384c" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1m6otKKNYoS6XLs7GTWX0TOINzbYzMKg2/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/1m6otKKNYoS6XLs7GTWX0TOINzbYzMKg2/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><h3 id="395ddb6c-37bb-80c1-b161-db6c39ff5675" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">1. 점수 추가</h3><h3 id="395ddb6c-37bb-8076-9ead-f79b5fe214df" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">2. 점수 기록</h3><h2 id="344ddb6c-37bb-80e0-8ff1-cdab5cf081f9" class="block-color-teal_background" data-notion-highlight="teal_background" dir="auto">[4차시] 사운드 효과와 추가 기능 탑재하기</h2><figure id="344ddb6c-37bb-8053-b364-e25f07810a4d" dir="ltr"><div class="source"><a href="https://drive.google.com/file/d/1ShfQQ3RDQ1Ql1baF4SUR5UbWgWtm9Nfp/view?usp=sharing " data-notion-file="https://drive.google.com/file/d/1ShfQQ3RDQ1Ql1baF4SUR5UbWgWtm9Nfp/view?usp=sharing " data-notion-file-alias="view?usp=sharing ">view?usp=sharing </a></div></figure><h3 id="395ddb6c-37bb-8000-97cd-c8c5466fe58c" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">1. 배경 음악</h3><h3 id="395ddb6c-37bb-804b-af48-c808866c8aaf" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">2. 충돌 시 사운드 실행</h3></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

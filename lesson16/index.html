@@ -1,0 +1,798 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[16차시] 서울의 1인 가구 분석 보고서 </title><meta name="data-notion-page-icon" content="🧑🏻‍🚀"/><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%A7%91%F0%9F%8F%BB%E2%80%8D%F0%9F%9A%80%3C%2Ftext%3E%3C%2Fsvg%3E"/><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><nav style="margin:16px 0;font-family:Malgun Gothic,sans-serif"><a href="../" style="color:rgb(55,53,47)">수업 목록</a></nav><article id="36fddb6c-37bb-804d-b83c-c694fc87bcf8" class="page sans" data-notion-page-icon="🧑🏻‍🚀"><header><img class="page-cover-image" src="https://app.notion.com/images/page-cover/texturelabs_concrete_146S.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon" data-emoji="🧑🏻‍🚀"></span></div><h1 class="page-title" dir="auto">[16차시] 서울의 1인 가구 분석 보고서 </h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h2 id="36fddb6c-37bb-801d-989e-cef47b81ae24" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto"><strong>📊 서울 1인 세대 데이터 분석 프로젝트</strong></h2><h3 id="36fddb6c-37bb-8085-821f-dbd7e2fe4787" class="" dir="auto"><strong>1단계: 분석 개요</strong></h3><p id="36fddb6c-37bb-809e-83ae-ffcfab2d467d" class="" dir="auto">• 서울시 1인 세대 증가 현황 및 사회적 변화에 대한 지식 파악   <br/>• 분석 범위(서울시 행정동 426개, 2019~2023년) </p><h3 id="36fddb6c-37bb-8044-8ccd-f5749769dd24" class="" dir="auto"><strong>2단계: 문제 정의</strong></h3><ul id="36fddb6c-37bb-80d2-9c70-fd9e0a5d2940" class="bulleted-list" dir="auto"><li style="list-style-type:disc">&quot;세대 구성은 어떻게 변하고 있는가?&quot;</li></ul><ul id="36fddb6c-37bb-80ea-9082-eb2c8b0f543b" class="bulleted-list" dir="auto"><li style="list-style-type:disc">&quot;1인 세대는 어디에 많이 분포하는가?&quot;</li></ul><h3 id="36fddb6c-37bb-8078-af4d-fe050700c186" class="" dir="auto"><strong>3단계: 데이터 수집</strong>   </h3><ul id="36fddb6c-37bb-802e-beab-d0edf10a2c97" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>주민등록 통계 데이터:</strong> 행정동별 세대 구성 현황 파악용   </li></ul><ul id="36fddb6c-37bb-800c-83d5-d1a124a629f8" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>인구이동 통계 데이터:</strong> 전입/전출, 성별, 연령, 이동 사유 정보</li></ul><ul id="36fddb6c-37bb-80ba-992f-fa11ae97f104" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>행정동 코드 데이터:</strong> 지역 명칭과 코드 연계 위한 기초 자료  </li></ul><h2 id="36fddb6c-37bb-80a7-8d98-edfbef336de8" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">🚍서울의 1인 가구 분석 데이터</h2><h4 id="373ddb6c-37bb-80ea-b812-c433b886f6aa" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">인구이동_2023.csv 파일과 .json 파일은 ‘클래스룸-자료’를 참고하세요.</h4><figure id="36fddb6c-37bb-80f8-a160-fd79ab2f3528" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_1%EC%B0%A8%EC%8B%9C.pdf" data-notion-file="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_1%EC%B0%A8%EC%8B%9C.pdf" data-notion-file-alias="1인 세대_1차시.pdf">1인 세대_1차시.pdf</a></div></figure><figure id="373ddb6c-37bb-80a4-9ae6-cebdfc7ca98c" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_2%EC%B0%A8%EC%8B%9C.pdf" data-notion-file="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_2%EC%B0%A8%EC%8B%9C.pdf" data-notion-file-alias="1인 세대_2차시.pdf">1인 세대_2차시.pdf</a></div></figure><figure id="383ddb6c-37bb-8093-a75a-dbfe7d5fb5b5" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_3%EC%B0%A8%EC%8B%9C.pdf" data-notion-file="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_3%EC%B0%A8%EC%8B%9C.pdf" data-notion-file-alias="1인 세대_3차시.pdf">1인 세대_3차시.pdf</a></div></figure><figure id="383ddb6c-37bb-8000-9178-e139cba2906e" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_4-1%EC%B0%A8%EC%8B%9C.pdf" data-notion-file="images/1%EC%9D%B8_%EC%84%B8%EB%8C%80_4-1%EC%B0%A8%EC%8B%9C.pdf" data-notion-file-alias="1인 세대_4-1차시.pdf">1인 세대_4-1차시.pdf</a></div></figure><figure id="36fddb6c-37bb-8031-80d6-e712b2897896" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/2019_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file="images/2019_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file-alias="2019_세대원수별 세대수.csv">2019_세대원수별 세대수.csv</a></div></figure><figure id="36fddb6c-37bb-809c-ad03-d971b8de8ff1" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/2020_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file="images/2020_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file-alias="2020_세대원수별 세대수.csv">2020_세대원수별 세대수.csv</a></div></figure><figure id="36fddb6c-37bb-8010-92e6-edb5dbf66a30" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/2021_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file="images/2021_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file-alias="2021_세대원수별 세대수.csv">2021_세대원수별 세대수.csv</a></div></figure><figure id="36fddb6c-37bb-802c-a602-c5b512825a45" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/2022_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file="images/2022_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file-alias="2022_세대원수별 세대수.csv">2022_세대원수별 세대수.csv</a></div></figure><figure id="36fddb6c-37bb-805e-be61-c39b254fb8a7" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/2023_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file="images/2023_%EC%84%B8%EB%8C%80%EC%9B%90%EC%88%98%EB%B3%84_%EC%84%B8%EB%8C%80%EC%88%98.csv" data-notion-file-alias="2023_세대원수별 세대수.csv">2023_세대원수별 세대수.csv</a></div></figure><figure id="373ddb6c-37bb-8026-8b88-eaec4b9aca89" dir="ltr"><div class="block-color-purple source" data-notion-highlight="purple"><a href="images/%ED%96%89%EC%A0%95%EB%8F%99%EC%BD%94%EB%93%9C_20240101.xlsx" data-notion-file="images/%ED%96%89%EC%A0%95%EB%8F%99%EC%BD%94%EB%93%9C_20240101.xlsx" data-notion-file-alias="행정동코드_20240101.xlsx">행정동코드_20240101.xlsx</a></div></figure><h3 id="36fddb6c-37bb-807e-91a3-c73b74430f18" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행1]은 아래 이미지처럼 준비된 상태에서 진행합니다.</h3><aside class="block-color-gray_background callout" data-notion-callout="" data-notion-callout-icon="💡" data-notion-callout-background="gray_background" style="white-space:pre-wrap;display:flex" id="36fddb6c-37bb-8083-b45e-f0bbbb90c297" dir="ltr"><div style="font-size:1.5em"><span class="icon" data-emoji="💡"></span></div><div style="width:100%"><h4 id="36fddb6c-37bb-80c5-bc67-dfd05c2ed14c" class="" dir="auto">확인해야 할 포함 내용<br/>(행정구역코드 / 기준일 / 전체세대 / 1인세대 / 2인세대 / 3인세대 / 4인세대 / 5인이상세대)</h4></div></aside><figure id="36fddb6c-37bb-80e3-8694-ebf104377f21" class="image" data-notion-image="images/2.png" dir="ltr"><a href="images/2.png"><img style="width:608.9896240234375px" src="images/2.png"/></a></figure><h3 id="36fddb6c-37bb-805f-b8ac-fcad092e9fad" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행1] 2019 자료의 &lt;고급 편집기&gt;에서 복사(ctrl+c)/붙이기(ctrl+v)</h3><figure id="36fddb6c-37bb-80e5-b956-dc55a20af7ba" class="image" data-notion-image="images/9aded8f3-c7bd-4828-a8b0-83f1b17b9d31.png" dir="ltr"><a href="images/9aded8f3-c7bd-4828-a8b0-83f1b17b9d31.png"><img style="width:581.4990859232175px" src="images/9aded8f3-c7bd-4828-a8b0-83f1b17b9d31.png"/></a></figure><p id="373ddb6c-37bb-80cf-9018-daef05eaf925" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto"><strong>2019_세대원수별 세대수 파일의 &lt;고급 편집기&gt;에서 해당 내용을 복사한 이후 </strong><br/>(1) 2020_세대원수별 세대수 파일의 &lt;고급 편집기&gt;에서 <br/>(2) <strong>4행 #”변경된 유형 ~</strong> “ <strong>줄의 맨 마지막(Int64.type}}) 뒤</strong>에 <strong>쉼표(‘,’)</strong>를 찍은 후  <br/>(3) 아래의 모든 내용을 삭제함.( in #”이름을 바꾼 열 수1” 부분 포함) <br/>(4) 2019년 데이터의 복사한 내용을 그대로 붙여넣음. <br/>(5) 같은 과정을 2021, 2022, 2023년도 반복함. </p><h1 id="36fddb6c-37bb-8046-95a6-ef4bf919db7b" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행1] 제출: 캡처 파일 + pbix 파일</h1><h4 id="36fddb6c-37bb-8011-8ee1-c68d1b96e712" class="" dir="auto">1차시 제출할 캡처 화면(참고)</h4><figure id="36fddb6c-37bb-80c1-8fe0-de30ccb921eb" class="image" data-notion-image="images/1%EC%B0%A8%EC%8B%9C_%EC%99%84%EC%84%B1%EB%B3%B8.png" dir="ltr"><a href="images/1%EC%B0%A8%EC%8B%9C_%EC%99%84%EC%84%B1%EB%B3%B8.png"><img style="width:703.982177734375px" src="images/1%EC%B0%A8%EC%8B%9C_%EC%99%84%EC%84%B1%EB%B3%B8.png"/></a></figure><h1 id="373ddb6c-37bb-80aa-ad86-cf4d629ef51d" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행2] 27쪽 ~ 37쪽</h1><p id="37addb6c-37bb-80a6-8a9d-fb445a39200a" class="block-color-brown_background" data-notion-highlight="brown_background" dir="auto"><strong>&lt;2차시를 위한 작업 순서&gt;<br/></strong><br/>1. 1차시에 제출한 본인의 ‘<strong>1차시_학번_성명.pbix</strong>’파일과 ‘<strong>2019_세대원수별 세대수.csv ~ 2023_세대원수별 세대수.csv</strong>’ 파일을 다운로드 한다. 다운로드 폴더로 이동하여 ‘<strong>1차시_학번_성명.pbix’ 파일</strong>을 더블클릭으로 실행한다.<br/><br/>2. 1차시 파일을 power BI로 열었는데, ‘<strong>세대원별 세대수’ 파일</strong>이 보이지 않고, ‘<strong>2019_세대원수별 세대수</strong>’ 파일만 보이면, 1차시 과제를 제출할 때 최종 ‘<strong>닫기 및 적용’(저장)이 제대로 되지 않았기 때문</strong>이다. 부득이 ‘2019_세대원수별 세대수’ 파일로 ‘<strong>고급편집기</strong>’를 이용해 나머지 파일을 작업하여, 1차시 종료 시점의  파일을 완성해야 한다. <br/><br/>3. <strong>‘세대원별 세대수’ 파일이 있으면 정상</strong>이다. 이제 <strong>홈-데이터가져오기</strong>로 가서 <strong>인구이동_2023.csv</strong> 파일을 연다. (<strong>데이터 가져오기-텍스트/CSV 파일 가져오기) </strong>인구이동_2023.csv 파일은 <strong>클래스룸에서 다운로드</strong>하면 된다.<br/><br/>4. 데이터 분석(가공) 작업은 쿼리 화면에서 한다. 쿼리 화면 전환은 ‘<strong>홈-데이터변환-데이터변환</strong>’을 하면 된다.<br/><br/>5. 37쪽까지 작업이 완료되면 반드시 ‘<strong>닫기 및 적용</strong>’ 후 꼭 ‘<strong>2차시_학번_성명</strong>’으로 <strong>저장</strong>을 하여 모든 내용이 제출용 파일에 반영되도록 한다. <br/><br/>6. 2차시 제출할 파일에 포함되는 <strong>쿼리는 총 8개</strong>이다. <br/>  <em> (1) 2019_세대원수별 세대수, (2) 2020_세대원수별 세대수, (3) 2021_세대원수별 세대수</em><br/> <em> (4) 2022_세대원수별 세대수</em>, <em>(5) 2023_세대원수별 세대수</em>, (6) 세대원별 세대수<br/>  (7) 인구이동_2023, (8) 행정동코드</p><h4 id="373ddb6c-37bb-802c-a4bd-cfea50172896" class="" dir="auto">2차시 제출할 캡처 화면(참고)</h4><figure id="37addb6c-37bb-80cc-8b1b-cbc4f898e405" class="image" data-notion-image="images/2%EC%B0%A8%EC%8B%9C_%ED%95%99%EB%B2%88_%EC%84%B1%EB%AA%85.png" dir="ltr"><a href="images/2%EC%B0%A8%EC%8B%9C_%ED%95%99%EB%B2%88_%EC%84%B1%EB%AA%85.png"><img style="width:703.9833984375px" src="images/2%EC%B0%A8%EC%8B%9C_%ED%95%99%EB%B2%88_%EC%84%B1%EB%AA%85.png"/></a></figure><h1 id="36fddb6c-37bb-80cc-a77e-cf9e712f8aa6" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행3] <mark class="highlight-red" data-notion-highlight="red">38쪽 ~ 45쪽</mark><br/>서울의 세대 구성 형태 변화 시각화<br/>(‘학번_성명+분석과 인사이트’작성)</h1><h4 id="36fddb6c-37bb-8026-aa3a-fa73168613f4" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto"><mark class="highlight-red" data-notion-highlight="red">3차시</mark>에 제출할 캡처 화면<br/><br/>#1.연도별 세대수 변화               <br/>#2.세대 구성 형태 변화           <br/>#3.세대 구성 형태(2019.12.)<br/>#4.세대 구성 형태(2023.12.)    <br/>+ 본인의 분석과 인사이트(‘분석과 인사이트’는 본인 생각으로 작성)</h4><h4 id="37addb6c-37bb-80f0-82fb-e3f0298ea351" class="block-color-red" data-notion-highlight="red" dir="auto"><strong>[수행3], [수행4-1], [수행4-2]는 보고서의 탭을 아래 이미지와 같이 새로 생성합니다. </strong></h4><figure id="380ddb6c-37bb-80d4-a863-d6a977c227ab" class="image" data-notion-image="images/%EC%88%98%ED%96%893.png" dir="ltr"><a href="images/%EC%88%98%ED%96%893.png"><img style="width:703.9874877929688px" src="images/%EC%88%98%ED%96%893.png"/></a></figure><h1 id="36fddb6c-37bb-80d0-bb9c-efa3a07334d7" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행4-1] <mark class="highlight-red" data-notion-highlight="red">46쪽 ~ 58쪽</mark><br/>서울특별시 자치구별 행정동별 1인 세대 현황<br/>(‘학번_성명+분석과 인사이트’작성)</h1><h4 id="36fddb6c-37bb-80d7-a6ba-fbf101039f69" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto"><mark class="highlight-red" data-notion-highlight="red"><strong>[4-1차시]</strong></mark> 화면 : 상단 제목은 ‘<mark class="highlight-red" data-notion-highlight="red">텍스트 상자</mark>’ 툴 이용<br/><br/>#1.자치구별 1인 세대수       <br/>#2.자치구별 1인 세대비율    <br/>#3.행정동별 1인 세대수  <br/>#4.행정동별 1인 세대비율  <br/>#5.행정동별 1인 세대수 맵   <br/>#6.행정동별 1인 세대 비율 맵     <br/>+ 분석 결과 해석(‘분석과 인사이트’는 본인 생각으로 작성)</h4><figure id="384ddb6c-37bb-802a-930f-ee785dd5b68b" class="image" data-notion-image="images/1.png" dir="ltr"><a href="images/1.png"><img style="width:703.9896240234375px" src="images/1.png"/></a></figure><h1 id="36fddb6c-37bb-8002-b61d-e57109f19f11" class="block-color-yellow_background" data-notion-highlight="yellow_background" dir="auto">[수행4-2] <mark class="highlight-red" data-notion-highlight="red">59쪽 ~ 70쪽</mark><br/>서울의 1인 세대 최종 분석  <br/>(#6의 분석은 ‘학번+성명+자기 생각’)</h1><h4 id="36fddb6c-37bb-80c8-9061-dfeeb2e05117" class="block-color-gray_background" data-notion-highlight="gray_background" dir="auto">4-2차시 제출할 캡처 화면(참고)<br/>#1. 성별로 보는 1인 세대<br/>#2. 나이대별 1인 세대 <br/>#3. 이사 온 이유 <br/>#4-1. 시군구읍면동별 전입세대수 <br/>#4-2. 선호 지역 분포 <br/>#5. 시각화 결과 탐색 분석(본인의 분석을 최대한 반영해 작성)</h4><figure id="380ddb6c-37bb-808c-9701-e3b8d34efd1f" class="image" data-notion-image="images/1%201.png" dir="ltr"><a href="images/1%201.png"><img style="width:658.9791870117188px" src="images/1%201.png"/></a></figure><p id="36fddb6c-37bb-8061-9ffa-d4ded0f68bb1" class="" dir="auto">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
